@@ -8,44 +8,7 @@ export type Program = {
   isDemo: true;
 };
 
-export const programs: Program[] = [
-  {
-    slug: "foundation",
-    title: "الدبلوم التأسيسي في علوم الحديث",
-    excerpt: "مدخل متدرج إلى علوم الحديث ومناهج المحدثين ومصادر السنة.",
-    href: "/programs/foundation",
-    duration: "عام دراسي",
-    status: "published",
-    isDemo: true
-  },
-  {
-    slug: "takhrij",
-    title: "التخريج ودراسة الأسانيد",
-    excerpt: "تطبيق عملي على جمع الطرق، دراسة الرواة، وبناء نتيجة معللة.",
-    href: "/programs/takhrij",
-    duration: "مسار تطبيقي",
-    status: "published",
-    isDemo: true
-  },
-  {
-    slug: "manuscripts",
-    title: "التحقيق وعلوم المخطوطات",
-    excerpt: "قراءة النسخ، المقابلة، ضبط الفروق، والتوثيق العلمي للنص.",
-    href: "/programs/manuscripts",
-    duration: "مسار بحثي",
-    status: "published",
-    isDemo: true
-  },
-  {
-    slug: "higher",
-    title: "المسار العالي",
-    excerpt: "حلقة بحث متقدمة تجمع الرواية والدراية والتحقيق بإشراف علمي.",
-    href: "/programs/higher",
-    duration: "متقدم",
-    status: "published",
-    isDemo: true
-  }
-];
+export const programs: Program[] = [];
 
 export const publicPages = [
   { slug: "about", title: "عن الكلية", lead: "كلية تدريسية بحثية متخصصة في علوم الحديث رواية ودراية، وفي التخريج ودراسة الأسانيد والتحقيق وعلوم المخطوطات." },
@@ -73,7 +36,25 @@ export const researchSites = [
 ];
 
 export const dashboardModules = {
-  admin: ["الصفحات والمحتوى", "البرامج والمقررات", "القبول والطلاب", "هيئة التدريس", "الرسوم", "المكتبة", "المواقع الحديثية", "الصلاحيات"],
-  faculty: ["مقرراتي", "طلابي", "الدروس", "البث", "الواجبات", "التصحيح", "الحضور", "الإعلانات"],
-  student: ["مقرراتي", "الدروس", "التقويم", "البث", "الواجبات", "الاختبارات", "الدرجات", "الشهادات"]
+  admin: [
+    { label: "نظرة عامة", href: "/dashboard/admin" },
+    { label: "المستخدمون", href: "/dashboard/admin/users" },
+    { label: "هيئة التدريس", href: "/dashboard/admin/faculty" },
+    { label: "الطلاب", href: "/dashboard/admin/students" },
+    { label: "البرامج", href: "/dashboard/admin/academic/programs" },
+    { label: "المقررات", href: "/dashboard/admin/academic/courses" },
+    { label: "الفصول", href: "/dashboard/admin/academic/terms" },
+    { label: "الدفعات", href: "/dashboard/admin/academic/cohorts" },
+    { label: "الشعب", href: "/dashboard/admin/academic/sections" },
+    { label: "التسجيلات", href: "/dashboard/admin/academic/enrollments" },
+    { label: "تحرير الصفحة", href: "/dashboard/admin/content/home" }
+  ],
+  faculty: [
+    { label: "مقرراتي", href: "/dashboard/faculty/courses" },
+    { label: "لوحة المدرس", href: "/dashboard/faculty" }
+  ],
+  student: [
+    { label: "لوحة الطالب", href: "/dashboard/student" },
+    { label: "مقرراتي", href: "/dashboard/student/courses" }
+  ]
 };

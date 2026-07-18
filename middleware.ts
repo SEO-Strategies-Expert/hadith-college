@@ -33,6 +33,21 @@ export async function middleware(request: NextRequest) {
     return NextResponse.redirect(redirectUrl);
   }
 
+  if (request.nextUrl.pathname.startsWith("/dashboard") && data.user) {
+    const { data: profile } = await supabase
+      .from("profiles")
+      .select("status")
+      .eq("id", data.user.id)
+      .maybeSingle();
+
+    if (profile && profile.status !== "active") {
+      const redirectUrl = request.nextUrl.clone();
+      redirectUrl.pathname = "/login";
+      redirectUrl.searchParams.set("error", "account-inactive");
+      return NextResponse.redirect(redirectUrl);
+    }
+  }
+
   return response;
 }
 

@@ -1,7 +1,21 @@
 import Image from "next/image";
 import Link from "next/link";
 
-export function DashboardLayout({ title, subtitle, modules, children }: { title: string; subtitle: string; modules: string[]; children: React.ReactNode }) {
+export type DashboardModule = string | { label: string; href: string };
+
+export function DashboardLayout({
+  title,
+  subtitle,
+  modules,
+  children,
+  badge = "Supabase Connected"
+}: {
+  title: string;
+  subtitle: string;
+  modules: DashboardModule[];
+  children: React.ReactNode;
+  badge?: string;
+}) {
   return (
     <div className="dashboard-layout-next">
       <div className="dashboard-shell">
@@ -12,17 +26,21 @@ export function DashboardLayout({ title, subtitle, modules, children }: { title:
           </Link>
           <div className="nav-label">القائمة الرئيسية</div>
           <nav className="nav">
-            {modules.map((module, index) => <a className={index === 0 ? "active" : ""} href={`#module-${index}`} key={module}><span className="ico">▧</span>{module}</a>)}
+            {modules.map((module, index) => {
+              const label = typeof module === "string" ? module : module.label;
+              const href = typeof module === "string" ? `#module-${index}` : module.href;
+              return <Link className={index === 0 ? "active" : ""} href={href} key={`${href}-${label}`}><span className="ico">▧</span>{label}</Link>;
+            })}
           </nav>
         </aside>
         <main className="dashboard-main">
           <header className="dash-header">
             <div>
-              <span className="eyebrow">Phase 1 Route Shell</span>
+              <span className="eyebrow">Academic Core MVP</span>
               <h1>{title}</h1>
               <p className="muted">{subtitle}</p>
             </div>
-            <span className="tag demo">Demo / Not Connected</span>
+            <span className="tag demo">{badge}</span>
           </header>
           {children}
         </main>
