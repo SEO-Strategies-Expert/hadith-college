@@ -4,6 +4,8 @@ Current migration:
 
 - `supabase/migrations/20260718000100_accounts_roles_cms.sql`
 
+Applied remotely to Supabase project ref `iqowychratwvykhlkfhu`.
+
 ## Accounts And Permissions
 
 - `profiles`
@@ -38,6 +40,8 @@ The auth trigger creates a matching `profiles` row when a Supabase Auth user is 
 The first implemented CMS cycle edits the homepage hero section:
 
 `/dashboard/admin/content/home` -> `page_sections.content_json` -> `/`
+
+Verified by `scripts/verify-supabase-cms.ts`, which creates a temporary content editor, updates the published homepage hero through RLS, verifies anonymous public read access, verifies anonymous users do not read drafts, restores the previous hero content, and removes the temporary user.
 
 ## Seed Data
 

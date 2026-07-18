@@ -8,12 +8,13 @@ npx supabase init
 
 Project listing now works after user login.
 
-Existing projects checked with `npx supabase projects list`:
+Projects checked with `npx supabase projects list` include:
 
 - `hassan67844@gmail.com's Project` — ref `kgjfkxmbstmwdihlugdp` — region `ap-southeast-1` — status `INACTIVE`
 - `Wisaltech-agency-mvp` — ref `uuohrexyjhltucjutmrm` — region `ap-southeast-2` — status `INACTIVE`
+- `hadith-college-prod` — ref `iqowychratwvykhlkfhu` — region `eu-central-1` — status `ACTIVE_HEALTHY`
 
-No project named `hadith-college-prod` exists yet.
+Project `hadith-college-prod` exists and is linked.
 
 Available organization:
 
@@ -40,32 +41,24 @@ CLI-supported regions:
 - `us-west-1`
 - `us-west-2`
 
-Recommended free-safe project create shape, after explicit approval and local password entry:
+Linked project:
 
-```bash
-npx supabase projects create hadith-college-prod \
-  --org-id klmwmtefchyceyqvecgq \
-  --region eu-central-1 \
-  --size nano \
-  --db-password "<ENTER_LOCALLY_NOT_IN_CHAT>"
+```text
+name: hadith-college-prod
+ref: iqowychratwvykhlkfhu
+region: eu-central-1
+status: ACTIVE_HEALTHY
 ```
 
-Do not use `micro` or larger compute sizes unless the user explicitly approves paid resources.
+The previous failing ref `iqowychratwyykhlkfhu` was a typo. The correct ref contains `vy`: `iqowychratwvykhlkfhu`.
 
-## HUMAN ACTION REQUIRED — DATABASE PASSWORD
+## Applied
 
-To create `hadith-college-prod`, the database password must be entered locally/securely. Do not paste it into chat.
+- `npx supabase@latest link --project-ref iqowychratwvykhlkfhu`
+- `npx supabase@latest db lint --linked --level warning --fail-on error`
+- `npx supabase@latest db push --dry-run`
+- `npx supabase@latest db push`
+- `npx supabase@latest db push --include-seed`
+- `npx supabase@latest gen types typescript --linked > src/types/database.types.ts`
 
-Once the project exists, run:
-
-```bash
-npx supabase link --project-ref <PROJECT_REF>
-npx supabase db push --dry-run
-npx supabase db push
-npx supabase gen types typescript --linked > src/types/database.types.ts
-```
-
-Current blocked commands before linking:
-
-- `npx supabase db push --dry-run` -> `Cannot find project ref. Have you run supabase link?`
-- `npx supabase gen types typescript --local` -> local Supabase database container is not running.
+The database password was entered locally through a secure PowerShell prompt and was removed from the session afterward.

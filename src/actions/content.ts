@@ -58,7 +58,7 @@ export async function updateHomeHero(formData: FormData) {
   await supabase.from("content_revisions").insert({
     entity_type: "page_section",
     entity_id: section.id,
-    revision_number: Date.now(),
+    revision_number: Math.floor(Date.now() / 1000),
     snapshot_json: section.content_json,
     created_by: user.id
   });

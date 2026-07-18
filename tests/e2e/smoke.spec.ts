@@ -5,5 +5,9 @@ test("homepage and dashboard routes render", async ({ page }) => {
   await expect(page.getByRole("heading", { name: "كلية الحديث وعلومه" })).toBeVisible();
 
   await page.goto("/dashboard/admin");
-  await expect(page.getByRole("heading", { name: "لوحة مدير الكلية" })).toBeVisible();
+  await expect(
+    page
+      .getByRole("heading", { name: "لوحة مدير الكلية" })
+      .or(page.getByRole("heading", { name: "تسجيل الدخول" }))
+  ).toBeVisible();
 });

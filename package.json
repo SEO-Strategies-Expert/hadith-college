@@ -11,6 +11,7 @@
     "typecheck": "tsc --noEmit",
     "test": "vitest run",
     "test:e2e": "playwright test",
+    "verify:supabase-cms": "tsx scripts/verify-supabase-cms.ts",
     "supabase": "supabase",
     "bootstrap-admin": "tsx scripts/bootstrap-admin.ts"
   },

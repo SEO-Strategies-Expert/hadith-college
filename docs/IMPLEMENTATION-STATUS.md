@@ -18,10 +18,10 @@ Branch: `feat/full-college-platform`
 | 0 | Backup tag | Done | `static-v1-backup` pushed to origin. |
 | 0 | Work branch | Done | `feat/full-college-platform` pushed to origin. |
 | 1 | Next.js App Router migration | Done | App Router scaffold, route shells, redirects, tests, and asset migration added. |
-| 2 | Supabase project setup | Blocked | Login works and projects were listed. `hadith-college-prod` does not exist. Creation requires local Database Password and explicit free-plan approval. |
+| 2 | Supabase project setup | Done | Linked to existing `hadith-college-prod` project ref `iqowychratwvykhlkfhu`. |
 | 3 | Environment variables | Done | `.env.example` and Zod validation added. Secret values are not committed. |
-| 4-6 | Database, roles, permissions, RLS | In Progress | Initial accounts/roles/CMS migration and seed added. `db push --dry-run` blocked until `supabase link`. |
-| 7-24 | CMS, academic, dashboard, labs, library, certificates | In Progress | First CMS hero edit cycle implemented in code; real verification blocked until Supabase project exists and migrations are applied. |
+| 4-6 | Database, roles, permissions, RLS | Done | Initial accounts/roles/CMS migration applied and seed pushed. CMS/RLS verification passed. |
+| 7-24 | CMS, academic, dashboard, labs, library, certificates | In Progress | First CMS hero edit cycle works against Supabase. Wider modules remain pending. |
 | 25 | Security audit | Pending | Requires auth/database implementation first. |
 | 26 | Tests | Pending | Unit/E2E scaffolding begins in Phase 1; full coverage later. |
 | 27 | Performance/accessibility | Pending | Must be checked throughout migration. |
@@ -30,15 +30,17 @@ Branch: `feat/full-college-platform`
 
 ## Human Actions Required Later
 
-### HUMAN ACTION REQUIRED — DATABASE PASSWORD
+### SUPABASE DATABASE PASSWORD
 
-Supabase login is complete. The project `hadith-college-prod` does not exist. Creating it requires a Database Password entered locally/securely and explicit confirmation to create a free-plan `nano` project.
+Supabase login is complete. The project `hadith-college-prod` exists and is linked. The database password was entered locally through a secure prompt, used for migration push commands, and removed from the session afterward.
 
-Current intended command shape:
+Resolved project ref:
 
 ```text
-npx supabase projects create hadith-college-prod --org-id klmwmtefchyceyqvecgq --region eu-central-1 --size nano --db-password "<ENTER_LOCALLY_NOT_IN_CHAT>"
+iqowychratwvykhlkfhu
 ```
+
+The earlier ref `iqowychratwyykhlkfhu` was incorrect.
 
 ### HUMAN ACTION REQUIRED — VERCEL LOGIN
 
@@ -52,10 +54,10 @@ Email, Zoom, Cron, and Supabase service-role secrets must be configured through 
 
 This repository is not yet a production platform. The following are not complete:
 
-- Real login.
-- Supabase database.
-- RLS policies.
-- Real dashboard CRUD.
+- Auth wiring and protected dashboard routes are started.
+- Supabase database is linked, migrated, and seeded.
+- RLS policies are enabled and the first CMS/RLS cycle passed.
+- The first dashboard CMS edit flow works for the homepage hero.
 - Admissions workflow.
 - Assignment submission/grading.
 - Attendance.
@@ -70,13 +72,17 @@ Completed on 2026-07-18:
 
 - `npm run lint` passed.
 - `npm run typecheck` passed.
-- `npm run test` passed: 1 file, 2 unit tests.
+- `npm run test` passed: 2 files, 4 unit tests.
 - `npm run test:e2e` passed: 2 Playwright smoke tests.
-- `npm run build` passed: 26 static/SSG routes.
+- `npm run build` passed.
 - `npm audit --audit-level=moderate` passed: 0 vulnerabilities after `postcss` override.
-- `npx supabase projects list` passed; `hadith-college-prod` was not found.
-- `npx supabase db push --dry-run` blocked because no Supabase project is linked.
-- `npx supabase gen types typescript --local` blocked because no local Supabase database container is running.
+- `npx supabase projects list` passed; `hadith-college-prod` was found and linked with ref `iqowychratwvykhlkfhu`.
+- `npx supabase@latest db push --dry-run` passed after password reset.
+- `npx supabase@latest db push` applied `20260718000100_accounts_roles_cms.sql`.
+- `npx supabase@latest db push --include-seed` applied `supabase/seed.sql`.
+- `npx supabase@latest gen types typescript --linked` generated `src/types/database.types.ts`.
+- `npm run verify:supabase-cms` passed CMS/RLS verification.
+- Secret scan passed: `.env.local` is ignored and the service role key was not found in repository files.
 
 ## Commits
 
