@@ -3,8 +3,11 @@
 Current migration:
 
 - `supabase/migrations/20260718000100_accounts_roles_cms.sql`
+- `supabase/migrations/20260718001000_academic_core_mvp.sql`
 
 Applied remotely to Supabase project ref `iqowychratwvykhlkfhu`.
+
+The CMS foundation migration is applied remotely. The Academic Core migration is staged locally and must be pushed with `SUPABASE_DB_PASSWORD` before running `verify:academic-core`.
 
 ## Accounts And Permissions
 
@@ -50,3 +53,69 @@ Current seed file:
 - `supabase/seed.sql`
 
 Seed data includes demo roles, permissions, public identity settings, a homepage page record, a homepage hero section, and navigation items. Demo rows use `is_demo = true`.
+
+Academic seed data moves the public program catalog into Supabase:
+
+- `foundation`
+- `takhrij`
+- `manuscripts`
+- `higher`
+- `ijazat`
+- `short-courses`
+
+It also creates starter levels, courses, and program-course links.
+
+## Academic Core MVP
+
+User and role administration:
+
+- `profiles`
+- `roles`
+- `permissions`
+- `role_permissions`
+- `user_roles`
+- `audit_logs`
+
+Faculty:
+
+- `faculty_profiles`
+
+Students:
+
+- `student_profiles`
+
+Programs and courses:
+
+- `academic_programs`
+- `program_levels`
+- `courses`
+- `course_learning_outcomes`
+- `course_prerequisites`
+- `program_courses`
+
+Terms, cohorts, sections, and enrollment:
+
+- `academic_terms`
+- `cohorts`
+- `course_sections`
+- `course_instructors`
+- `enrollments`
+
+Learning content:
+
+- `course_modules`
+- `lessons`
+- `lesson_resources`
+- `lesson_progress`
+
+Storage buckets:
+
+- `public-assets`
+- `faculty-avatars`
+- `course-materials`
+
+Verification script:
+
+- `npm run verify:academic-core`
+
+The script creates temporary users with random in-memory passwords, creates a program/course/section, assigns an instructor, enrolls a student, publishes a lesson, records progress, checks negative RLS cases, and cleans up.
