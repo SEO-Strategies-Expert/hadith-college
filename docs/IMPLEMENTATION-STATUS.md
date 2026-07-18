@@ -70,6 +70,7 @@ This repository is not yet a production platform. The following are not complete
 
 Completed on 2026-07-18:
 
+- Stability tag `cms-foundation-v1` pushed at `b41c7f8`.
 - `npm run lint` passed.
 - `npm run typecheck` passed.
 - `npm run test` passed: 2 files, 4 unit tests.
