@@ -21,7 +21,7 @@ Branch: `feat/full-college-platform`
 | 2 | Supabase project setup | Done | Linked to existing `hadith-college-prod` project ref `iqowychratwvykhlkfhu`. |
 | 3 | Environment variables | Done | `.env.example` and Zod validation added. Secret values are not committed. |
 | 4-6 | Database, roles, permissions, RLS | Done | Initial accounts/roles/CMS migration applied and seed pushed. CMS/RLS verification passed. |
-| 7-24 | CMS, academic, dashboard, labs, library, certificates | In Progress | Academic Core MVP code, routes, migration, seed, docs, and verification script are staged. Remote migration push is pending secure DB password. |
+| 7-24 | CMS, academic, dashboard, labs, library, certificates | In Progress | Academic Core MVP database, seed, RLS verification, routes, and dashboards are deployed. Wider modules remain pending. |
 | 25 | Security audit | Pending | Requires auth/database implementation first. |
 | 26 | Tests | Pending | Unit/E2E scaffolding begins in Phase 1; full coverage later. |
 | 27 | Performance/accessibility | Pending | Must be checked throughout migration. |
@@ -30,9 +30,9 @@ Branch: `feat/full-college-platform`
 
 ## Human Actions Required Later
 
-### HUMAN ACTION REQUIRED — DATABASE PASSWORD FOR ACADEMIC CORE
+### SUPABASE DATABASE PASSWORD
 
-Supabase login is complete. The project `hadith-college-prod` exists and is linked. The previous database password was removed from the session. The next Academic Core migration requires a new secure local prompt before running `db push --dry-run`, `db push`, `db push --include-seed`, `gen types`, and `verify:academic-core`.
+Supabase login is complete. The project `hadith-college-prod` exists and is linked. The database password was loaded from the secure Codex environment for the migration process only, then removed from the process environment afterward.
 
 Resolved project ref:
 
@@ -54,9 +54,6 @@ Email, Zoom, Cron, and Supabase service-role secrets must be configured through 
 
 This repository is not yet a production platform. The following are not complete:
 
-- Academic Core migration `20260718001000_academic_core_mvp.sql` must be pushed to Supabase.
-- TypeScript database types must be regenerated after pushing the migration.
-- `npm run verify:academic-core` must pass against the remote database.
 - Admissions workflow.
 - Assignment submission/grading.
 - Attendance.
@@ -72,7 +69,7 @@ Completed on 2026-07-18:
 - Stability tag `cms-foundation-v1` pushed at `b41c7f8`.
 - `npm run lint` passed.
 - `npm run typecheck` passed.
-- `npm run test` passed: 2 files, 4 unit tests.
+- `npm run test` passed: 3 files, 9 unit tests.
 - `npm run test:e2e` passed: 2 Playwright smoke tests.
 - `npm run build` passed.
 - `npm audit --audit-level=moderate` passed: 0 vulnerabilities after `postcss` override.
@@ -86,18 +83,18 @@ Completed on 2026-07-18:
 - `cms-foundation-v1` tag was pushed at `b41c7f8`.
 - Academic Core MVP local code added for users, faculty, students, programs, courses, terms, cohorts, sections, enrollments, faculty course lessons, and student lesson progress.
 - Academic Core local `npm run lint` and `npm run typecheck` passed after implementation.
-
-Pending secure-password validation:
-
-- `npx supabase@latest db push --dry-run`
-- `npx supabase@latest db push`
-- `npx supabase@latest db push --include-seed`
-- `npx supabase@latest gen types typescript --linked > src/types/database.types.ts`
-- `npm run verify:academic-core`
+- `npx supabase@latest db push --dry-run` passed for `20260718001000_academic_core_mvp.sql`.
+- `npx supabase@latest db push` applied `20260718001000_academic_core_mvp.sql`.
+- `npx supabase@latest db push --include-seed` applied the Academic Core seed hash.
+- `npx supabase@latest db lint --linked` passed: no schema errors.
+- `npx supabase@latest gen types typescript --project-id iqowychratwvykhlkfhu` regenerated `src/types/database.types.ts`.
+- `npm run verify:academic-core` passed against the real Supabase project.
+- `npm run verify:supabase-cms` passed after Academic Core deployment.
 
 ## Commits
 
 - `d1fec08` - `chore: backup legacy static site`
 - `b452756` - `feat: initialize nextjs platform`
 - `b41c7f8` - `feat: complete supabase cms integration`
-- Academic Core commits pending in the current worktree.
+- `413823f` - `docs: update academic platform guides`
+- Academic Core deployment verification commit pending.

@@ -174,8 +174,14 @@ async function main() {
   const { data: otherLessons } = await otherStudent.client.from("lessons").select("id").eq("id", created.lessonId);
   if ((otherLessons ?? []).length !== 0) throw new Error("unenrolled student can read lesson.");
 
-  const { error: instructorProgramUpdate } = await instructor.client.from("academic_programs").update({ name_ar: "محاولة ممنوعة" }).eq("id", created.programId);
-  if (!instructorProgramUpdate) throw new Error("instructor can update academic programs.");
+  const { data: instructorProgramUpdate, error: instructorProgramError } = await instructor.client
+    .from("academic_programs")
+    .update({ name_ar: "محاولة ممنوعة" })
+    .eq("id", created.programId)
+    .select("id");
+  if (!instructorProgramError && (instructorProgramUpdate ?? []).length > 0) {
+    throw new Error("instructor can update academic programs.");
+  }
 
   console.log("ACADEMIC_CORE_VERIFICATION=passed");
 }

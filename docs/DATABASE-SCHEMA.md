@@ -7,7 +7,7 @@ Current migration:
 
 Applied remotely to Supabase project ref `iqowychratwvykhlkfhu`.
 
-The CMS foundation migration is applied remotely. The Academic Core migration is staged locally and must be pushed with `SUPABASE_DB_PASSWORD` before running `verify:academic-core`.
+Both CMS Foundation and Academic Core MVP migrations are applied remotely. `verify:supabase-cms` and `verify:academic-core` pass against the real Supabase project.
 
 ## Accounts And Permissions
 
