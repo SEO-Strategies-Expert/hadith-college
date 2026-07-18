@@ -47,14 +47,20 @@ export const dashboardModules = {
     { label: "الدفعات", href: "/dashboard/admin/academic/cohorts" },
     { label: "الشعب", href: "/dashboard/admin/academic/sections" },
     { label: "التسجيلات", href: "/dashboard/admin/academic/enrollments" },
+    { label: "الإعلانات", href: "/dashboard/admin/announcements" },
+    { label: "التقويم", href: "/dashboard/admin/calendar" },
     { label: "تحرير الصفحة", href: "/dashboard/admin/content/home" }
   ],
   faculty: [
+    { label: "لوحة المدرس", href: "/dashboard/faculty" },
     { label: "مقرراتي", href: "/dashboard/faculty/courses" },
-    { label: "لوحة المدرس", href: "/dashboard/faculty" }
+    { label: "الإعلانات", href: "/dashboard/faculty/announcements" },
+    { label: "التقويم", href: "/dashboard/faculty/calendar" }
   ],
   student: [
     { label: "لوحة الطالب", href: "/dashboard/student" },
-    { label: "مقرراتي", href: "/dashboard/student/courses" }
+    { label: "مقرراتي", href: "/dashboard/student/courses" },
+    { label: "الإعلانات", href: "/dashboard/student/announcements" },
+    { label: "التقويم", href: "/dashboard/student/calendar" }
   ]
 };
