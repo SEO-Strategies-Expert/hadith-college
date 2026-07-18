@@ -13,6 +13,7 @@
     "test:e2e": "playwright test",
     "verify:supabase-cms": "tsx scripts/verify-supabase-cms.ts",
     "verify:academic-core": "tsx scripts/verify-academic-core.ts",
+    "verify:teaching-operations": "tsx scripts/verify-teaching-operations.ts",
     "supabase": "supabase",
     "bootstrap-admin": "tsx scripts/bootstrap-admin.ts"
   },

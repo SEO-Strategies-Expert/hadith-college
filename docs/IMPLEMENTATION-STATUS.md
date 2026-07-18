@@ -21,9 +21,9 @@ Branch: `feat/full-college-platform`
 | 2 | Supabase project setup | Done | Linked to existing `hadith-college-prod` project ref `iqowychratwvykhlkfhu`. |
 | 3 | Environment variables | Done | `.env.example` and Zod validation added. Secret values are not committed. |
 | 4-6 | Database, roles, permissions, RLS | Done | Initial accounts/roles/CMS migration applied and seed pushed. CMS/RLS verification passed. |
-| 7-24 | CMS, academic, dashboard, labs, library, certificates | In Progress | Academic Core MVP database, seed, RLS verification, routes, and dashboards are deployed. Wider modules remain pending. |
-| 25 | Security audit | Pending | Requires auth/database implementation first. |
-| 26 | Tests | Pending | Unit/E2E scaffolding begins in Phase 1; full coverage later. |
+| 7-24 | CMS, academic, dashboard, labs, library, certificates | In Progress | Academic Core MVP and Teaching Operations MVP database, RLS verification, routes, and dashboards are deployed. Wider modules remain pending. |
+| 25 | Security audit | In Progress | RLS negative checks cover CMS, Academic Core, and Teaching Operations MVP boundaries. |
+| 26 | Tests | In Progress | Unit/E2E and real Supabase verification scripts run for implemented MVP modules. |
 | 27 | Performance/accessibility | Pending | Must be checked throughout migration. |
 | 28 | Documentation | In Progress | Audit/status started; full docs pending. |
 | 29 | Preview deployment/PR | Pending | Do not merge to `main` until build, auth, CRUD, RLS, and human actions are resolved. |
@@ -55,8 +55,6 @@ Email, Zoom, Cron, and Supabase service-role secrets must be configured through 
 This repository is not yet a production platform. The following are not complete:
 
 - Admissions workflow.
-- Assignment submission/grading.
-- Attendance.
 - Certificates and verification.
 - Private file storage.
 - Email and Zoom integrations.
@@ -90,6 +88,13 @@ Completed on 2026-07-18:
 - `npx supabase@latest gen types typescript --project-id iqowychratwvykhlkfhu` regenerated `src/types/database.types.ts`.
 - `npm run verify:academic-core` passed against the real Supabase project.
 - `npm run verify:supabase-cms` passed after Academic Core deployment.
+- Stability tag `academic-core-v1` pushed at `6c0c278`.
+- `npx supabase@latest db push --dry-run` passed for `20260718002000_teaching_operations_mvp.sql`.
+- `npx supabase@latest db push` applied `20260718002000_teaching_operations_mvp.sql`.
+- `npx supabase@latest db lint --linked` passed: no schema errors.
+- `npx supabase@latest gen types typescript --project-id iqowychratwvykhlkfhu` regenerated `src/types/database.types.ts`.
+- `npm run verify:teaching-operations` passed against the real Supabase project.
+- Latest `npm run lint`, `npm run typecheck`, `npm run test`, `npm run test:e2e`, `npm run build`, and `npm audit --audit-level=moderate` passed.
 
 ## Commits
 
@@ -97,4 +102,5 @@ Completed on 2026-07-18:
 - `b452756` - `feat: initialize nextjs platform`
 - `b41c7f8` - `feat: complete supabase cms integration`
 - `413823f` - `docs: update academic platform guides`
-- Academic Core deployment verification commit pending.
+- `6c0c278` - `feat: deploy and verify academic core database`
+- Teaching Operations MVP commits pending.

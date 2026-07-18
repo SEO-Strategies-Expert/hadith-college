@@ -4,10 +4,11 @@ Current migration:
 
 - `supabase/migrations/20260718000100_accounts_roles_cms.sql`
 - `supabase/migrations/20260718001000_academic_core_mvp.sql`
+- `supabase/migrations/20260718002000_teaching_operations_mvp.sql`
 
 Applied remotely to Supabase project ref `iqowychratwvykhlkfhu`.
 
-Both CMS Foundation and Academic Core MVP migrations are applied remotely. `verify:supabase-cms` and `verify:academic-core` pass against the real Supabase project.
+CMS Foundation, Academic Core MVP, and Teaching Operations MVP migrations are applied remotely. `verify:supabase-cms`, `verify:academic-core`, and `verify:teaching-operations` pass against the real Supabase project.
 
 ## Accounts And Permissions
 
@@ -119,3 +120,65 @@ Verification script:
 - `npm run verify:academic-core`
 
 The script creates temporary users with random in-memory passwords, creates a program/course/section, assigns an instructor, enrolls a student, publishes a lesson, records progress, checks negative RLS cases, and cleans up.
+
+## Teaching Operations MVP
+
+Announcements:
+
+- `announcements`
+- `announcement_targets`
+- `announcement_reads`
+
+Assignments:
+
+- `assignments`
+- `assignment_resources`
+- `assignment_submissions`
+- `submission_files`
+- `submission_feedback`
+
+Quizzes and question banks:
+
+- `question_banks`
+- `questions`
+- `question_options`
+- `quizzes`
+- `quiz_questions`
+- `quiz_attempts`
+- `quiz_answers`
+
+Attendance:
+
+- `class_sessions`
+- `attendance_records`
+- `attendance_adjustment_requests`
+
+Grades:
+
+- `grade_categories`
+- `grade_items`
+- `student_grades`
+- `final_grades`
+- `grade_publications`
+
+Calendar and meetings:
+
+- `class_meetings`
+- `meeting_occurrences`
+- `meeting_attendance_links`
+
+Notifications:
+
+- `notifications`
+- `notification_preferences`
+- `notification_deliveries`
+
+Storage bucket:
+
+- `assignment-submissions`
+
+Verification script:
+
+- `npm run verify:teaching-operations`
+
+The script creates temporary admin, instructor, student, other-student, content-editor, and suspended-student users; creates a section; runs announcement, meeting, assignment, quiz, auto-grading, attendance, grade publication, notification, and RLS negative checks; then cleans up.
