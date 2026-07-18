@@ -2,23 +2,26 @@ import Link from "next/link";
 import { ProgramGrid } from "@/components/public/ProgramGrid";
 import { PublicLayout } from "@/components/public/PublicLayout";
 import { researchSites } from "@/lib/demo-data";
+import { getHomeHero } from "@/lib/content/home";
 
-export default function HomePage() {
+export default async function HomePage() {
+  const hero = await getHomeHero();
+
   return (
     <PublicLayout>
       <section className="hero">
         <div className="container hero-grid">
           <div className="hero-copy">
-            <span className="section-kicker">جامعة أبو بكر إبراهيم</span>
-            <h1>كلية الحديث وعلومه</h1>
-            <p className="lead">منصة عربية متخصصة في الرواية والدراية والتحقيق، تنتقل الآن من عرض Static إلى منصة Next.js قابلة للإدارة.</p>
+            <span className="section-kicker">{hero.content.eyebrow_ar}</span>
+            <h1>{hero.content.title_ar}</h1>
+            <p className="lead">{hero.content.lead_ar}</p>
             <div className="button-row">
-              <Link className="btn gold" href="/admissions">قدّم الآن</Link>
-              <Link className="btn ghost" href="/programs">استعرض البرامج</Link>
+              <Link className="btn gold" href={hero.content.primary_href}>{hero.content.primary_cta_ar}</Link>
+              <Link className="btn ghost" href={hero.content.secondary_href}>{hero.content.secondary_cta_ar}</Link>
             </div>
           </div>
           <div className="hero-card">
-            <span className="tag demo">Phase 1</span>
+            <span className="tag demo">{hero.source === "supabase" ? "Supabase CMS" : "Fallback Demo"}</span>
             <h2>تحويل تقني منظم</h2>
             <p>هذه النسخة تحفظ الهوية الحالية وتجهز المسارات والمكونات قبل ربط Supabase والصلاحيات.</p>
           </div>
