@@ -1,68 +1,88 @@
-export type PublicNavItem = {
+export type ManagementNavChild = {
   label: string;
-  href: string;
-  description?: string;
+  href?: string;
+  icon?: string;
+  disabled?: boolean;
 };
 
-export type PublicNavGroup = {
+export type ManagementNavItem = {
   label: string;
-  href: string;
-  items?: PublicNavItem[];
+  href?: string;
+  icon?: string;
+  featured?: boolean;
+  university?: boolean;
+  children?: ManagementNavChild[];
 };
 
-export const publicNavigation: PublicNavGroup[] = [
+const disabledSocials: ManagementNavChild[] = [
+  { label: "YouTube", icon: "YT", disabled: true },
+  { label: "Facebook", icon: "f", disabled: true },
+  { label: "X", icon: "X", disabled: true },
+  { label: "Instagram", icon: "◎", disabled: true },
+  { label: "Telegram", icon: "✈", disabled: true }
+];
+
+export const managementNavigation: ManagementNavItem[] = [
   { label: "الرئيسية", href: "/" },
   {
     label: "عن الكلية",
     href: "/about",
-    items: [
-      { label: "نبذة عن الكلية", href: "/about", description: "تعريف موجز بالكلية ورسالتها العلمية." },
+    children: [
       { label: "الرسالة والرؤية والأهداف", href: "/about/mission-vision" },
-      { label: "قالوا عن الكلية", href: "/about/testimonials" },
-      { label: "جامعة أبو بكر إبراهيم", href: "/about/university" }
+      { label: "قالوا عن الكلية", href: "/about/testimonials" }
     ]
   },
+  { label: "روابط الكلية", children: disabledSocials },
+  { label: "البث", href: "/live", icon: "◉" },
   {
-    label: "الدراسة",
+    label: "البرامج",
     href: "/programs",
-    items: [
-      { label: "جميع البرامج", href: "/programs" },
-      { label: "البكالوريوس", href: "/programs/bachelor" },
-      { label: "الماجستير", href: "/programs/master" },
-      { label: "الدكتوراه", href: "/programs/doctorate" },
-      { label: "الدبلومات", href: "/diplomas" },
-      { label: "الدورات", href: "/courses" },
-      { label: "مناهج الدراسة", href: "/curricula" },
-      { label: "الرسوم", href: "/fees" }
+    children: [
+      { label: "برنامج البكالوريوس", href: "/programs/bachelor" },
+      { label: "برنامج الماجستير", href: "/programs/master" },
+      { label: "برنامج الدكتوراه", href: "/programs/doctorate" }
     ]
   },
+  { label: "الدبلومات", href: "/diplomas" },
+  { label: "الدورات", href: "/courses" },
+  { label: "مختبر التخريج", href: "/research/takhrij-lab" },
+  { label: "دخول الطالب", href: "/dashboard/student", featured: true },
+  { label: "مناهج الدراسة", href: "/curricula" },
+  { label: "الرسوم", href: "/fees" },
+  { label: "الكتب والكورسات المدفوعة", href: "/store" },
   {
-    label: "البحث العلمي",
-    href: "/research",
-    items: [
-      { label: "بوابة البحث العلمي", href: "/research" },
-      { label: "مختبر التخريج", href: "/research/takhrij-lab" },
-      { label: "المواقع البحثية الحديثية", href: "/research/hadith-sites" },
-      { label: "الأبحاث المحكمة والمنشورة", href: "/research/peer-reviewed" }
+    label: "المواقع البحثية الحديثية",
+    href: "/research/hadith-sites",
+    children: [
+      { label: "الباحث الحديثي", disabled: true },
+      { label: "الدرر السنية", disabled: true },
+      { label: "المكتبة الشاملة", disabled: true }
     ]
   },
   {
     label: "الهيئة العلمية",
-    href: "/scientific-body",
-    items: [
+    children: [
       { label: "أعضاء هيئة التدريس", href: "/scientific-body/faculty" },
       { label: "المجلس العلمي", href: "/scientific-body/scientific-council" }
     ]
   },
   {
     label: "المجلة العلمية",
-    href: "/journal",
-    items: [
-      { label: "عن المجلة", href: "/journal" },
+    children: [
       { label: "الهيئة الاستشارية", href: "/journal/advisory-board" },
-      { label: "الأبحاث والأعداد", href: "/journal/research" }
+      { label: "الأبحاث", href: "/journal/research" }
     ]
   },
-  { label: "الأخبار", href: "/news" }
+  { label: "أبحاث مُحَكَّمة ومنشورة", href: "/research/peer-reviewed" },
+  { label: "الأخبار", href: "/news" },
+  {
+    label: "جامعة أبو بكر إبراهيم",
+    href: "/about/university",
+    university: true,
+    children: [
+      { label: "عن الجامعة", href: "/about/university" },
+      { label: "منصة الجامعة", disabled: true },
+      ...disabledSocials.map((item) => ({ ...item, label: `${item.label} الجامعة` }))
+    ]
+  }
 ];
-

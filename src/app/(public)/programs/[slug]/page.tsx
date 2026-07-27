@@ -2,17 +2,20 @@ import { notFound } from "next/navigation";
 import { PageHero } from "@/components/public/PageHero";
 import { PublicLayout } from "@/components/public/PublicLayout";
 import { getPublishedProgram } from "@/lib/academic/academic-core";
+import { listPublishedProgramsByType } from "@/lib/public/programs";
+import { ProgramGrid } from "@/components/public/ProgramGrid";
 
 export const dynamic = "force-dynamic";
 
 export default async function ProgramPage({ params }: { params: Promise<{ slug: string }> }) {
   const { slug } = await params;
-  const program = await getPublishedProgram(slug);
   const degreeLabels: Record<string, string> = { bachelor: "البكالوريوس", master: "الماجستير", doctorate: "الدكتوراه" };
-  if (!program && !degreeLabels[slug]) notFound();
-  if (!program) {
-    return <PublicLayout><PageHero title={degreeLabels[slug]} lead={`برامج ${degreeLabels[slug]} المنشورة ستظهر هنا عند اعتمادها في النظام الأكاديمي.`} /><section className="section"><div className="container empty-state"><h2>لا يوجد برنامج منشور حاليًا</h2><p>لم نضف اسم برنامج أو مدة أو رسومًا افتراضية.</p></div></section></PublicLayout>;
+  if (degreeLabels[slug]) {
+    const degreePrograms = await listPublishedProgramsByType(slug);
+    return <PublicLayout><PageHero title={`برنامج ${degreeLabels[slug]}`} lead={`البرامج المنشورة من نوع ${degreeLabels[slug]} في النظام الأكاديمي.`} /><section className="section"><div className="container">{degreePrograms.length ? <ProgramGrid programs={degreePrograms} /> : <div className="notice">لا يوجد برنامج منشور من هذا النوع حاليًا.</div>}</div></section></PublicLayout>;
   }
+  const program = await getPublishedProgram(slug);
+  if (!program) notFound();
 
   return (
     <PublicLayout>
