@@ -1,50 +1,444 @@
+import Image from "next/image";
 import Link from "next/link";
-import { ProgramGrid } from "@/components/public/ProgramGrid";
 import { PublicLayout } from "@/components/public/PublicLayout";
-import { researchSites } from "@/lib/demo-data";
-import { getHomeHero } from "@/lib/content/home";
 import { listPublishedPrograms } from "@/lib/academic/academic-core";
+import { getHomeHero } from "@/lib/content/home";
+
+const legacyPrograms = [
+  {
+    name: "التخريج ودراسة الأسانيد",
+    description:
+      "منهج تطبيقي لتتبع الحديث في مصادره، وجمع طرقه، ودراسة رجاله، والموازنة بين الروايات، وصياغة الحكم العلمي المعلل.",
+    href: "/programs",
+  },
+  {
+    name: "الدبلوم التأسيسي",
+    description:
+      "مدخل منهجي إلى مصطلح الحديث، ومناهج المحدثين، ومصادر السنة، ومهارات البحث.",
+    href: "/diplomas",
+  },
+  {
+    name: "التحقيق وعلوم المخطوطات",
+    description:
+      "قراءة المخطوط، وصف النسخ، المقابلة، الضبط، صناعة الحواشي، وإخراج النص المحقق.",
+    href: "/programs",
+  },
+  {
+    name: "المسار العالي",
+    description:
+      "تأهيل بحثي متقدم يجمع التخصصين ويقود إلى مشروع علمي أصيل.",
+    href: "/programs",
+  },
+  {
+    name: "الإجازات والدورات",
+    description:
+      "مجالس سماع، إجازات مسندة، ودورات إثرائية قصيرة في موضوعات دقيقة.",
+    href: "/courses",
+  },
+];
+
+const researchPreview = [
+  {
+    icon: "بح",
+    name: "الباحث الحديثي",
+    description:
+      "محرك بحث حديثي للوصول إلى النصوص والمصادر والنتائج البحثية.",
+  },
+  {
+    icon: "در",
+    name: "الموسوعة الحديثية — الدرر السنية",
+    description:
+      "بحث في الأحاديث وأحكام المحدثين والشروح والموضوعات.",
+  },
+  {
+    icon: "شم",
+    name: "المكتبة الشاملة",
+    description:
+      "مكتبة نصية لكتب الحديث والرجال والعلل والمصطلح.",
+  },
+  {
+    icon: "جس",
+    name: "جامع السنة وشروحها",
+    description:
+      "بوابة تجمع نصوص السنة وشروحها وخدمات الفهرسة والبحث.",
+  },
+];
+
+function BookIcon() {
+  return (
+    <svg aria-hidden="true" viewBox="0 0 24 24">
+      <path d="M4 5.5A2.5 2.5 0 0 1 6.5 3H11v16H6.5A2.5 2.5 0 0 0 4 21.5z" />
+      <path d="M20 5.5A2.5 2.5 0 0 0 17.5 3H13v16h4.5A2.5 2.5 0 0 1 20 21.5z" />
+    </svg>
+  );
+}
 
 export default async function HomePage() {
-  const [hero, programs] = await Promise.all([getHomeHero(), listPublishedPrograms()]);
+  const [hero, publishedPrograms] = await Promise.all([
+    getHomeHero(),
+    listPublishedPrograms(),
+  ]);
+  const programs = legacyPrograms.map((fallback, index) => {
+    const published = publishedPrograms[index];
+    return published
+      ? {
+          name: published.name_ar,
+          description: published.short_description || fallback.description,
+          href: `/programs/${published.slug}`,
+        }
+      : fallback;
+  });
 
   return (
     <PublicLayout>
       <section className="hero">
         <div className="container hero-grid">
-          <div className="hero-copy">
-            <span className="section-kicker">{hero.content.eyebrow_ar}</span>
+          <div className="hero-copy reveal visible">
+            <span className="eyebrow">
+              <i />
+              {hero.content.eyebrow_ar}
+            </span>
             <h1>{hero.content.title_ar}</h1>
             <p className="lead">{hero.content.lead_ar}</p>
+            <div className="hero-points">
+              <span>مسارات متدرجة</span>
+              <span>تعلم بالممارسة</span>
+              <span>مكتبة وقاعدة بيانات</span>
+            </div>
             <div className="button-row">
-              <Link className="btn gold" href={hero.content.primary_href}>{hero.content.primary_cta_ar}</Link>
-              <Link className="btn ghost" href={hero.content.secondary_href}>{hero.content.secondary_cta_ar}</Link>
+              <Link className="btn gold" href={hero.content.primary_href}>
+                {hero.content.primary_cta_ar}
+              </Link>
+              <Link className="btn ghost" href={hero.content.secondary_href}>
+                {hero.content.secondary_cta_ar}
+              </Link>
             </div>
           </div>
-          <div className="hero-card">
-            <span className="tag demo">{hero.source === "supabase" ? "Supabase CMS" : "Fallback Demo"}</span>
-            <h2>تحويل تقني منظم</h2>
-            <p>هذه النسخة تحفظ الهوية الحالية وتربط المحتوى والبرامج واللوحات بقاعدة Supabase تدريجيًا.</p>
+          <div className="hero-visual reveal visible">
+            <div className="arch-stage">
+              <div className="isnad-visual">
+                <Image
+                  alt=""
+                  className="isnad-mark"
+                  height={128}
+                  src="/brand/hadith-college-logo-128.png"
+                  width={128}
+                />
+                <h3>سندٌ متصل… ومنهجٌ محقق</h3>
+                <p>
+                  تتبع الرواية، اجمع الطرق، قارن النسخ، واكتب الحكم العلمي داخل
+                  بيئة تدريبية واحدة.
+                </p>
+                <div className="chain">
+                  <div className="chain-row">
+                    <span>المصدر الأصلي</span><i /><span>طريق الرواية</span>
+                  </div>
+                  <div className="chain-row">
+                    <span>دراسة الرواة</span><i /><span>المقارنة والحكم</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div className="floating-card fc-1">
+              <b>مختبر التخريج</b><small>بحث · طرق · رواة · حكم</small>
+            </div>
+            <div className="floating-card fc-2">
+              <b>مختبر التحقيق</b><small>صور · مقابلة · حواشٍ · إخراج</small>
+            </div>
+            <div className="floating-card fc-3">
+              <b>إجازات موثقة</b><small>سجل رقمي ورمز تحقق</small>
+            </div>
           </div>
         </div>
       </section>
-      <section className="section">
+
+      <section className="trust-strip">
         <div className="container">
-          <div className="section-head"><div className="copy"><span className="section-kicker">البرامج</span><h2>مسارات علمية قابلة للإدارة</h2></div></div>
-          <ProgramGrid programs={programs} />
+          <div className="trust-grid">
+            <div className="trust-item">
+              <div className="icon-badge"><BookIcon /></div>
+              <div><b>تعليم متدرج</b><span>من التأسيس حتى البحث المتقدم</span></div>
+            </div>
+            <div className="trust-item">
+              <div className="icon-badge">
+                <svg aria-hidden="true" viewBox="0 0 24 24">
+                  <path d="M10 13a5 5 0 0 0 7.1.1l2-2a5 5 0 0 0-7.1-7.1l-1.1 1.1" />
+                  <path d="M14 11a5 5 0 0 0-7.1-.1l-2 2A5 5 0 0 0 12 20l1.1-1.1" />
+                </svg>
+              </div>
+              <div><b>تطبيق عملي</b><span>تدريب على الأسانيد والطرق</span></div>
+            </div>
+            <div className="trust-item">
+              <div className="icon-badge">
+                <svg aria-hidden="true" viewBox="0 0 24 24">
+                  <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z" />
+                  <path d="M14 2v6h6M8 13h8M8 17h6" />
+                </svg>
+              </div>
+              <div><b>تحقيق المخطوط</b><span>مقابلة النسخ والتوثيق العلمي</span></div>
+            </div>
+            <div className="trust-item">
+              <div className="icon-badge">
+                <svg aria-hidden="true" viewBox="0 0 24 24">
+                  <circle cx="12" cy="8" r="6" />
+                  <path d="M8.2 13 7 22l5-3 5 3-1.2-9" />
+                </svg>
+              </div>
+              <div><b>شهادات وإجازات</b><span>سجل موحد قابل للتحقق</span></div>
+            </div>
+          </div>
         </div>
       </section>
+
+      <section className="section">
+        <div className="container">
+          <div className="section-head reveal visible">
+            <div className="copy">
+              <span className="section-kicker">المسارات الأكاديمية</span>
+              <h2>رحلة علمية واضحة، لا دورات متناثرة</h2>
+              <p className="muted">
+                يتقدم الطالب عبر مسار تأسيسي، ثم يتخصص في التخريج أو التحقيق،
+                وصولًا إلى مستوى بحثي أعلى يجمع بين الرواية والدراية.
+              </p>
+            </div>
+            <Link className="btn ghost" href="/programs">عرض جميع البرامج</Link>
+          </div>
+          <div className="bento">
+            {programs.map((program, index) => (
+              <article
+                className={`card reveal visible ${index === 0 ? "featured dark-card" : ""} ${index === 2 ? "gold-card" : ""}`}
+                key={`${program.href}-${program.name}`}
+              >
+                {index === 0 ? <span className="tag">المسار المحوري</span> : null}
+                <div className="num">{String(index + 1).padStart(2, "0")}</div>
+                <h3>{program.name}</h3>
+                <p className={index === 0 || index === 2 ? undefined : "muted"}>
+                  {program.description}
+                </p>
+                {index === 0 ? (
+                  <ul className="mini-list">
+                    <li>تطبيقات داخل مختبر التخريج</li>
+                    <li>دراسة عملية لكتب الرجال والعلل</li>
+                    <li>مشروع تخريج متكامل بإشراف علمي</li>
+                  </ul>
+                ) : null}
+                <Link className="card-link" href={program.href}>
+                  {index === 0 || index === 2 ? "تفاصيل المسار" : "استكشف البرنامج"}
+                </Link>
+              </article>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      <section className="section dark">
+        <div className="container">
+          <div className="section-head reveal visible">
+            <div className="copy">
+              <span className="section-kicker">ميزة الكلية التنافسية</span>
+              <h2>مختبران يحولان المعرفة إلى ممارسة</h2>
+              <p className="muted">
+                لا يكتفي الطالب بالمشاهدة؛ بل ينفذ المهمة العلمية داخل أدوات
+                مصممة للتعلم، ثم يتلقى التصحيح والتغذية الراجعة.
+              </p>
+            </div>
+            <Link className="btn ghost" href="/research/takhrij-lab">
+              دخول مختبر التخريج
+            </Link>
+          </div>
+          <div className="lab-showcase">
+            <article className="lab-card reveal visible">
+              <span className="tag">مختبر التخريج</span>
+              <h3>ابحث، اجمع الطرق، ثم علّل الحكم</h3>
+              <p className="muted">
+                قاعدة بيانات حديثية تعليمية مترابطة تتيح البحث في النصوص
+                والمصادر والرواة والطرق، وبناء ملف تخريج كامل مع المراجعة.
+              </p>
+              <div className="screen">
+                <div className="screen-toolbar">
+                  <span>محرك البحث الحديثي التعليمي</span>
+                  <div className="dots"><i /><i /><i /></div>
+                </div>
+                <div className="search-mock">إنما الأعمال بالنيات…</div>
+                {[
+                  ["صحيح البخاري", "كتاب بدء الوحي · طريق أول", "عرض"],
+                  ["صحيح مسلم", "الشواهد والمتابعات · مقارنة", "عرض"],
+                  ["بطاقة الراوي", "الجرح والتعديل · طبقة الراوي", "فتح"],
+                ].map(([title, detail, action]) => (
+                  <div className="result-row" key={title}>
+                    <span className="status" />
+                    <div><b>{title}</b><small>{detail}</small></div>
+                    <span>{action}</span>
+                  </div>
+                ))}
+              </div>
+            </article>
+            <article className="lab-card reveal visible">
+              <span className="tag">مختبر التحقيق</span>
+              <h3>قارن النسخ وأخرج نصًا موثقًا</h3>
+              <p className="muted">
+                إدارة مشروعات التحقيق كاملة: رفع النسخ، فهرستها، القراءة
+                والمقابلة، إثبات الفروق، صناعة الحواشي، والمراجعة.
+              </p>
+              <div className="screen">
+                <div className="screen-toolbar">
+                  <span>المقابلة بين النسخ</span>
+                  <div className="dots"><i /><i /><i /></div>
+                </div>
+                <div className="manuscript-sheet">
+                  قال المصنف رحمه الله: <mark>حدثنا</mark> شيخنا بإسناده إلى
+                  الإمام… ثم ذكر اختلاف اللفظ في النسخة الثانية، وأثبت ما يوافق
+                  السياق والأصول.
+                </div>
+              </div>
+            </article>
+          </div>
+        </div>
+      </section>
+
+      <section className="section">
+        <div className="container">
+          <div className="section-head reveal visible">
+            <div className="copy">
+              <span className="section-kicker">مسار طالب العلم</span>
+              <h2>خمس محطات من التأسيس إلى الإنجاز العلمي</h2>
+            </div>
+          </div>
+          <div className="steps">
+            {[
+              ["التأسيس", "ضبط المصطلحات والمصادر ومناهج المحدثين."],
+              ["التخصص", "اختيار مسار التخريج أو التحقيق وفق الميول والهدف."],
+              ["المختبر", "تنفيذ مهمات عملية مصححة بإشراف علمي."],
+              ["المشروع", "إنجاز بحث أو نص محقق بمعايير واضحة."],
+              ["الإجازة والتخرج", "توثيق الإنجاز وإتاحته بسجل قابل للتحقق."],
+            ].map(([title, description]) => (
+              <article className="step reveal visible" key={title}>
+                <h3>{title}</h3><p className="muted">{description}</p>
+              </article>
+            ))}
+          </div>
+        </div>
+      </section>
+
       <section className="section compact">
-        <div className="container grid-2">
-          <article className="card">
-            <span className="section-kicker">المواقع الحديثية</span>
-            <h2 style={{ fontSize: 30 }}>مصادر بحثية Demo</h2>
-            <p className="muted">هذه القائمة العامة باقية كدليل مصادر، وسيتم تحويل إدارتها لاحقًا إلى CMS متخصص.</p>
-            <div className="research-tags">{researchSites.map((site) => <span className="research-tag" key={site}>{site}</span>)}</div>
-          </article>
-          <article className="platform-note">
-            <b>تنبيه حالة التنفيذ:</b> CMS/Auth/RLS Foundation مكتملة، وAcademic Core MVP قيد التوسعة على الفرع المخصص دون دمج إلى main.
-          </article>
+        <div className="container">
+          <div className="metric-band reveal visible">
+            <div className="metric"><b>4</b><span>مسارات أكاديمية متدرجة</span></div>
+            <div className="metric"><b>2</b><span>مختبران تطبيقيان</span></div>
+            <div className="metric"><b>1</b><span>قاعدة معرفة موحدة</span></div>
+            <div className="metric"><b>RTL</b><span>تجربة عربية أصيلة</span></div>
+          </div>
+        </div>
+      </section>
+
+      <section className="section">
+        <div className="container">
+          <div className="section-head reveal visible">
+            <div className="copy">
+              <span className="section-kicker">الهيئة العلمية</span>
+              <h2>خبرة علمية تقود الطالب خطوة بخطوة</h2>
+              <p className="muted">
+                تجمع الهيئة العلمية بين التدريس والإشراف والبحث، وتدير المقررات
+                والمختبرات والمشروعات العلمية ومراجعة الإنتاج قبل نشره.
+              </p>
+            </div>
+            <Link className="btn ghost" href="/scientific-body/faculty">
+              تعرف إلى المجلس العلمي
+            </Link>
+          </div>
+          <div className="grid-3">
+            {[
+              ["المجلس العلمي", "رئيس المجلس العلمي", "الإشراف على المنهج، المعايير العلمية، والإجازات."],
+              ["التخريج والأسانيد", "أستاذ المسار التخصصي", "دراسة الرواة والطرق والعلل والتطبيقات العملية."],
+              ["تحقيق التراث", "أستاذ علوم المخطوطات", "قراءة النسخ، المقابلة، التوثيق وصناعة النص المحقق."],
+            ].map(([tag, title, description]) => (
+              <article className="card profile-card reveal visible" key={title}>
+                <div className="profile-art" />
+                <div className="profile-body">
+                  <span className="tag">{tag}</span>
+                  <h3>{title}</h3>
+                  <p className="muted">{description}</p>
+                </div>
+              </article>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      <section className="section">
+        <div className="container">
+          <div className="section-head reveal visible">
+            <div className="copy">
+              <span className="section-kicker">المعرفة والإصدارات</span>
+              <h2>المحتوى العلمي جزء من تجربة الكلية</h2>
+              <p className="muted">
+                مقالات منهجية، تحقيقات، أبحاث محكمة، أدلة عملية، ونشرة دورية
+                تربط الطالب بالممارسة البحثية.
+              </p>
+            </div>
+            <Link className="btn ghost" href="/journal/research">
+              زيارة مركز الإصدارات
+            </Link>
+          </div>
+          <div className="grid-3">
+            {[
+              ["", "دليل علمي", "قراءة 8 دقائق", "كيف تبدأ تخريج حديث بطريقة منهجية؟", "خريطة عملية من تحديد النص حتى جمع الطرق وصياغة النتيجة."],
+              ["gold", "علوم المخطوطات", "ملف تطبيقي", "المقابلة بين النسخ: قواعد وأخطاء شائعة", "مبادئ اختيار النسخة الأم وإثبات الفروق وصناعة الحاشية."],
+              ["paper", "مجلة الكلية", "العدد التمهيدي", "بحوث في الرواية والدراية والتحقيق", "ملف تمهيدي يوضح محاور المجلة ومعايير النشر العلمي."],
+            ].map(([cover, category, meta, title, description]) => (
+              <article className="card news-card reveal visible" key={title}>
+                <div className={`news-cover ${cover}`} />
+                <div className="news-body">
+                  <div className="news-meta"><span>{category}</span><span>{meta}</span></div>
+                  <h3>{title}</h3>
+                  <p className="muted">{description}</p>
+                  <Link className="card-link" href="/journal/research">اقرأ المزيد</Link>
+                </div>
+              </article>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      <section className="section">
+        <div className="container">
+          <div className="section-head reveal visible">
+            <div className="copy">
+              <span className="section-kicker">بوابة المصادر الخارجية</span>
+              <h2>المواقع الحديثية البحثية في مكان واحد</h2>
+              <p className="muted">
+                دليل متجدد يضم الباحث الحديثي، والدرر السنية، والمكتبة الشاملة،
+                وجامع السنة وشروحها، وغيرها من المصادر المفيدة للطالب والباحث.
+              </p>
+            </div>
+            <Link className="btn ghost" href="/research/hadith-sites">
+              عرض الدليل الكامل
+            </Link>
+          </div>
+          <div className="research-preview">
+            {researchPreview.map((site) => (
+              <Link className="research-mini-card" href="/research/hadith-sites" key={site.name}>
+                <span className="research-card-icon">{site.icon}</span>
+                <h3>{site.name}</h3>
+                <p>{site.description}</p>
+              </Link>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      <section className="section compact">
+        <div className="container">
+          <div className="cta-panel reveal visible">
+            <div>
+              <h2>ابدأ رحلتك في خدمة السنة والتراث</h2>
+              <p>اختر المسار المناسب، راجع متطلبات القبول، وأرسل طلبك الأولي.</p>
+            </div>
+            <div className="button-row">
+              <Link className="btn gold" href="/admissions">القبول والتسجيل</Link>
+              <Link className="btn ghost" href="/contact">تحدث مع مستشار القبول</Link>
+            </div>
+          </div>
         </div>
       </section>
     </PublicLayout>
