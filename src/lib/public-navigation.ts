@@ -19,7 +19,8 @@ const disabledSocials: ManagementNavChild[] = [
   { label: "Facebook", icon: "f", disabled: true },
   { label: "X", icon: "X", disabled: true },
   { label: "Instagram", icon: "◎", disabled: true },
-  { label: "Telegram", icon: "✈", disabled: true }
+  { label: "Telegram", icon: "✈", disabled: true },
+  { label: "أخرى", icon: "+", disabled: true }
 ];
 
 export const managementNavigation: ManagementNavItem[] = [
@@ -56,7 +57,7 @@ export const managementNavigation: ManagementNavItem[] = [
     children: [
       { label: "الباحث الحديثي", disabled: true },
       { label: "الدرر السنية", disabled: true },
-      { label: "المكتبة الشاملة", disabled: true }
+      { label: "الشاملة", disabled: true }
     ]
   },
   {
