@@ -8,7 +8,11 @@ export const dynamic = "force-dynamic";
 export default async function ProgramPage({ params }: { params: Promise<{ slug: string }> }) {
   const { slug } = await params;
   const program = await getPublishedProgram(slug);
-  if (!program) notFound();
+  const degreeLabels: Record<string, string> = { bachelor: "البكالوريوس", master: "الماجستير", doctorate: "الدكتوراه" };
+  if (!program && !degreeLabels[slug]) notFound();
+  if (!program) {
+    return <PublicLayout><PageHero title={degreeLabels[slug]} lead={`برامج ${degreeLabels[slug]} المنشورة ستظهر هنا عند اعتمادها في النظام الأكاديمي.`} /><section className="section"><div className="container empty-state"><h2>لا يوجد برنامج منشور حاليًا</h2><p>لم نضف اسم برنامج أو مدة أو رسومًا افتراضية.</p></div></section></PublicLayout>;
+  }
 
   return (
     <PublicLayout>

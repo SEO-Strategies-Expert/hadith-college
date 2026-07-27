@@ -12,8 +12,26 @@ export const programs: Program[] = [];
 
 export const publicPages = [
   { slug: "about", title: "عن الكلية", lead: "كلية تدريسية بحثية متخصصة في علوم الحديث رواية ودراية، وفي التخريج ودراسة الأسانيد والتحقيق وعلوم المخطوطات." },
+  { slug: "about/mission-vision", title: "الرسالة والرؤية والأهداف", lead: "مساحة للمحتوى المؤسسي المعتمد عند نشره من إدارة الكلية." },
+  { slug: "about/testimonials", title: "قالوا عن الكلية", lead: "لا توجد شهادات أو اقتباسات منشورة للعرض حاليًا." },
+  { slug: "about/university", title: "جامعة أبو بكر إبراهيم", lead: "المعلومات المتاحة عن الجامعة وعلاقتها بالكلية دون إضافة ادعاءات غير موثقة." },
   { slug: "admissions", title: "القبول والتسجيل", lead: "طلب التحاق أولي مع نظام رسوم مرن يراعي قدرة الطالب ولا يؤثر في التقييم العلمي." },
   { slug: "courses", title: "الدورات التدريبية والإثرائية", lead: "دورات قصيرة مركزة في مهارات حديثية وبحثية تخدم الطالب والباحث والمحقق." },
+  { slug: "diplomas", title: "الدبلومات", lead: "الدبلومات المنشورة من الكلية ستظهر هنا عند توفر بياناتها المعتمدة." },
+  { slug: "curricula", title: "مناهج الدراسة", lead: "عرض عام للبرامج والمستويات والمقررات المنشورة، دون المواد التعليمية الخاصة." },
+  { slug: "fees", title: "الرسوم والدعم", lead: "معلومات الرسوم وسياسات الدعم المنشورة رسميًا فقط." },
+  { slug: "store", title: "الكتب والكورسات", lead: "فهرس تعريفي فقط؛ الدفع الإلكتروني والتحميل المدفوع غير مفعّلين." },
+  { slug: "live", title: "البث المباشر", lead: "مركز حالة البث والمحاضرات القادمة والتسجيلات المتاحة." },
+  { slug: "research", title: "البحث العلمي", lead: "بوابة مختبر التخريج والمصادر البحثية والأبحاث المحكمة." },
+  { slug: "research/takhrij-lab", title: "مختبر التخريج", lead: "مدخل عام إلى مختبر التخريج والبحث الحديثي." },
+  { slug: "research/hadith-sites", title: "المواقع البحثية الحديثية", lead: "دليل منظم للمواقع البحثية؛ لا يظهر رابط خارجي ما لم يكن موثقًا." },
+  { slug: "research/peer-reviewed", title: "الأبحاث المحكمة والمنشورة", lead: "الأبحاث المنشورة رسميًا ستظهر هنا عند توفرها." },
+  { slug: "scientific-body", title: "الهيئة العلمية", lead: "بوابة أعضاء هيئة التدريس والمجلس العلمي." },
+  { slug: "scientific-body/faculty", title: "أعضاء هيئة التدريس", lead: "تظهر ملفات أعضاء هيئة التدريس المنشورة من النظام الأكاديمي." },
+  { slug: "scientific-body/scientific-council", title: "المجلس العلمي", lead: "تظهر بيانات المجلس العلمي بعد اعتمادها ونشرها." },
+  { slug: "journal", title: "المجلة العلمية", lead: "بوابة المجلة العلمية وهيئتها الاستشارية وأبحاثها وأعدادها." },
+  { slug: "journal/advisory-board", title: "الهيئة الاستشارية", lead: "تظهر بيانات الهيئة الاستشارية بعد اعتمادها ونشرها." },
+  { slug: "journal/research", title: "أبحاث وأعداد المجلة", lead: "لا توجد أبحاث أو أعداد منشورة للعرض حاليًا." },
   { slug: "faculty", title: "الهيئة العلمية", lead: "صفحة عامة لأعضاء هيئة التدريس والمشرفين العلميين، وسترتبط لاحقًا بحسابات وصلاحيات المدرسين." },
   { slug: "library", title: "المكتبة الرقمية", lead: "واجهة مكتبة وإصدارات ومصادر، وستنتقل في المراحل التالية إلى Supabase Storage وسياسات وصول." },
   { slug: "publications", title: "الإصدارات العلمية ومجلة الكلية", lead: "أبحاث محكمة، تحقيقات، أدلة تطبيقية، ومحتوى منهجي يخدم الطالب والباحث." },
@@ -37,30 +55,31 @@ export const researchSites = [
 
 export const dashboardModules = {
   admin: [
-    { label: "نظرة عامة", href: "/dashboard/admin" },
-    { label: "المستخدمون", href: "/dashboard/admin/users" },
-    { label: "هيئة التدريس", href: "/dashboard/admin/faculty" },
-    { label: "الطلاب", href: "/dashboard/admin/students" },
-    { label: "البرامج", href: "/dashboard/admin/academic/programs" },
-    { label: "المقررات", href: "/dashboard/admin/academic/courses" },
-    { label: "الفصول", href: "/dashboard/admin/academic/terms" },
-    { label: "الدفعات", href: "/dashboard/admin/academic/cohorts" },
-    { label: "الشعب", href: "/dashboard/admin/academic/sections" },
-    { label: "التسجيلات", href: "/dashboard/admin/academic/enrollments" },
-    { label: "الإعلانات", href: "/dashboard/admin/announcements" },
-    { label: "التقويم", href: "/dashboard/admin/calendar" },
-    { label: "تحرير الصفحة", href: "/dashboard/admin/content/home" }
+    { label: "نظرة عامة", href: "/dashboard/admin", group: "النظرة العامة" },
+    { label: "البرامج", href: "/dashboard/admin/academic/programs", group: "الشؤون الأكاديمية" },
+    { label: "المقررات", href: "/dashboard/admin/academic/courses", group: "الشؤون الأكاديمية" },
+    { label: "الفصول", href: "/dashboard/admin/academic/terms", group: "الشؤون الأكاديمية" },
+    { label: "الدفعات", href: "/dashboard/admin/academic/cohorts", group: "الشؤون الأكاديمية" },
+    { label: "الشعب", href: "/dashboard/admin/academic/sections", group: "الشؤون الأكاديمية" },
+    { label: "التسجيلات", href: "/dashboard/admin/academic/enrollments", group: "الشؤون الأكاديمية" },
+    { label: "المستخدمون", href: "/dashboard/admin/users", group: "الأشخاص" },
+    { label: "الطلاب", href: "/dashboard/admin/students", group: "الأشخاص" },
+    { label: "هيئة التدريس", href: "/dashboard/admin/faculty", group: "الأشخاص" },
+    { label: "الإعلانات", href: "/dashboard/admin/announcements", group: "التدريس" },
+    { label: "التقويم", href: "/dashboard/admin/calendar", group: "التدريس" },
+    { label: "تحرير الصفحة", href: "/dashboard/admin/content/home", group: "المحتوى العام" },
+    { label: "المواقع البحثية", href: "/dashboard/admin/research-sites", group: "البحث العلمي" }
   ],
   faculty: [
-    { label: "لوحة المدرس", href: "/dashboard/faculty" },
-    { label: "مقرراتي", href: "/dashboard/faculty/courses" },
-    { label: "الإعلانات", href: "/dashboard/faculty/announcements" },
-    { label: "التقويم", href: "/dashboard/faculty/calendar" }
+    { label: "لوحة المدرس", href: "/dashboard/faculty", group: "النظرة العامة" },
+    { label: "مقرراتي", href: "/dashboard/faculty/courses", group: "التدريس" },
+    { label: "الإعلانات", href: "/dashboard/faculty/announcements", group: "التدريس" },
+    { label: "التقويم", href: "/dashboard/faculty/calendar", group: "التدريس" }
   ],
   student: [
-    { label: "لوحة الطالب", href: "/dashboard/student" },
-    { label: "مقرراتي", href: "/dashboard/student/courses" },
-    { label: "الإعلانات", href: "/dashboard/student/announcements" },
-    { label: "التقويم", href: "/dashboard/student/calendar" }
+    { label: "لوحة الطالب", href: "/dashboard/student", group: "النظرة العامة" },
+    { label: "مقرراتي", href: "/dashboard/student/courses", group: "الدراسة" },
+    { label: "الإعلانات", href: "/dashboard/student/announcements", group: "الدراسة" },
+    { label: "التقويم", href: "/dashboard/student/calendar", group: "الدراسة" }
   ]
 };

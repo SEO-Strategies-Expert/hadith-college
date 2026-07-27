@@ -17,8 +17,12 @@ const nextConfig: NextConfig = {
       { source: "/dashboards/dashboard-faculty.html", destination: "/dashboard/faculty", permanent: true },
       { source: "/dashboards/research-sites-admin.html", destination: "/dashboard/admin/research-sites", permanent: true },
       { source: "/hadith-research-sites.html", destination: "/research-sites", permanent: true },
-      { source: "/takhrij-lab.html", destination: "/takhrij-lab", permanent: true },
-      { source: "/manuscripts-lab.html", destination: "/manuscripts-lab", permanent: true }
+      { source: "/takhrij-lab.html", destination: "/research/takhrij-lab", permanent: true },
+      { source: "/manuscripts-lab.html", destination: "/manuscripts-lab", permanent: true },
+      { source: "/takhrij-lab", destination: "/research/takhrij-lab", permanent: true },
+      { source: "/research-sites", destination: "/research/hadith-sites", permanent: true },
+      { source: "/publications", destination: "/journal", permanent: true },
+      { source: "/faculty", destination: "/scientific-body/faculty", permanent: true }
     ];
   },
   async headers() {
