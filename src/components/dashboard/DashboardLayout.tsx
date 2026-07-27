@@ -22,8 +22,12 @@ export function DashboardLayout({
         <aside className="sidebar">
           <Link className="brand" href="/">
             <Image alt="شعار كلية الحديث وعلومه" className="brand-emblem" src="/brand/hadith-college-logo-128.png" width={64} height={64} loading="eager" />
-            <span className="brand-copy"><b>كلية الحديث وعلومه</b><small>منصة الإنتاج</small></span>
+            <span className="dash-brand-copy"><b>كلية الحديث وعلومه</b><small>للرواية والدراية والتحقيق</small></span>
           </Link>
+          <div className="role-card">
+            <span className="avatar" aria-hidden="true">ح</span>
+            <span><b>{title}</b><small>{badge}</small></span>
+          </div>
           <div className="nav-label">القائمة الرئيسية</div>
           <nav className="nav">
             {modules.map((module, index) => {
@@ -36,13 +40,12 @@ export function DashboardLayout({
         <main className="dashboard-main">
           <header className="dash-header">
             <div>
-              <span className="eyebrow">Academic Core MVP</span>
               <h1>{title}</h1>
-              <p className="muted">{subtitle}</p>
+              <p>{subtitle}</p>
             </div>
             <span className="tag demo">{badge}</span>
           </header>
-          {children}
+          <div className="dashboard-content">{children}</div>
         </main>
       </div>
     </div>
