@@ -1,6 +1,5 @@
 import { signInWithEmail } from "@/actions/auth";
 import { PublicLayout } from "@/components/public/PublicLayout";
-import Image from "next/image";
 
 export default async function LoginPage({ searchParams }: { searchParams: Promise<Record<string, string | string[] | undefined>> }) {
   const params = await searchParams;
@@ -21,10 +20,6 @@ export default async function LoginPage({ searchParams }: { searchParams: Promis
       <section className="section">
         <div className="container grid-2">
           <article className="card">
-            <div className="auth-brand">
-              <Image alt="شعار كلية الحديث وعلومه" src="/brand/hadith-college-logo-128.png" width={80} height={80} />
-              <div><b>كلية الحديث وعلومه</b><span>الدخول الآمن إلى البوابة الأكاديمية</span></div>
-            </div>
             <form action={signInWithEmail}>
               <div className="form-grid">
                 <div className="field full">
