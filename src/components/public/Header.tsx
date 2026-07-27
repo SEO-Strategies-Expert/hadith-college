@@ -49,10 +49,7 @@ function NavigationItem({ item }: { item: ManagementNavItem }) {
   if (!item.children) {
     return (
       <li>
-        <Link
-          className={item.icon ? "legacy-broadcast-link" : undefined}
-          href={item.href!}
-        >
+        <Link className={item.icon ? "legacy-broadcast-link" : undefined} href={item.href!}>
           {item.icon ? <span aria-hidden="true">{item.icon}</span> : null}
           {item.label}
         </Link>
@@ -61,18 +58,10 @@ function NavigationItem({ item }: { item: ManagementNavItem }) {
   }
 
   const menu = (
-    <div
-      className={`mega-menu ${desktop && open ? "legacy-floating-menu" : ""}`}
-      role="menu"
-      style={desktop ? position : undefined}
-    >
-      {item.href &&
-      !item.children.some((child) => child.href === item.href) ? (
+    <div className={`mega-menu ${desktop && open ? "legacy-floating-menu" : ""}`} role="menu" style={desktop ? position : undefined}>
+      {item.href && !item.children.some((child) => child.href === item.href) ? (
         <Link href={item.href}>
-          <span>
-            <b>نظرة عامة</b>
-            <small>{item.label}</small>
-          </span>
+          <span><b>نظرة عامة</b><small>{item.label}</small></span>
         </Link>
       ) : null}
       {item.children.map((child) =>
@@ -80,14 +69,8 @@ function NavigationItem({ item }: { item: ManagementNavItem }) {
           <DisabledItem item={child} key={child.label} />
         ) : (
           <Link href={child.href!} key={child.label}>
-            {child.icon ? (
-              <span aria-hidden="true" className="legacy-platform-icon">
-                {child.icon}
-              </span>
-            ) : null}
-            <span>
-              <b>{child.label}</b>
-            </span>
+            {child.icon ? <span aria-hidden="true" className="legacy-platform-icon">{child.icon}</span> : null}
+            <span><b>{child.label}</b></span>
           </Link>
         ),
       )}
@@ -108,23 +91,9 @@ function NavigationItem({ item }: { item: ManagementNavItem }) {
 
   return (
     <li className={open ? "dropdown-open" : undefined}>
-      <button
-        aria-expanded={open}
-        aria-haspopup="true"
-        className="nav-link-button"
-        onClick={toggleMenu}
-        ref={buttonRef}
-        type="button"
-      >
+      <button aria-expanded={open} aria-haspopup="true" className="nav-link-button" onClick={toggleMenu} ref={buttonRef} type="button">
         {item.university ? (
-          <Image
-            alt=""
-            aria-hidden="true"
-            className="legacy-university-nav-logo"
-            height={28}
-            src="/brand/aboubacar-ibrahim-university-icon-64.png"
-            width={28}
-          />
+          <Image alt="" aria-hidden="true" className="legacy-university-nav-logo" height={28} src="/brand/aboubacar-ibrahim-university-icon-64.png" width={28} />
         ) : null}
         {item.label} <span aria-hidden="true">⌄</span>
       </button>
@@ -138,9 +107,7 @@ export function Header() {
 
   return (
     <>
-      <a className="skip-link" href="#main">
-        انتقل إلى المحتوى
-      </a>
+      <a className="skip-link" href="#main">انتقل إلى المحتوى</a>
       <div className="topbar">
         <div className="container">
           <span>كلية متخصصة في الرواية والدراية والتحقيق</span>
@@ -152,19 +119,10 @@ export function Header() {
         </div>
       </div>
       <header className="site-header">
-        <Link
-          aria-label="جامعة أبو بكر إبراهيم"
-          className="header-accreditation"
-          href="/about/university"
-        >
+        <Link aria-label="جامعة أبو بكر إبراهيم" className="header-accreditation" href="/about/university">
           <span className="container header-accreditation-inner">
             <span className="header-accreditation-icon" aria-hidden="true">
-              <Image
-                alt=""
-                height={34}
-                src="/brand/aboubacar-ibrahim-university-icon-64.png"
-                width={34}
-              />
+              <svg viewBox="0 0 24 24"><path d="M3 10h18"/><path d="M5 10V8l7-4 7 4v2"/><path d="M6 10v8M10 10v8M14 10v8M18 10v8"/><path d="M3 20h18M4 18h16"/><path d="m16.5 4.8 1.2 1.2 2.6-2.7"/></svg>
             </span>
             <span className="header-accreditation-copy">
               <small>الجهة الجامعية المعتمدة</small>
@@ -174,45 +132,16 @@ export function Header() {
           </span>
         </Link>
         <div className="container nav-shell">
-          <Link
-            aria-label="كلية الحديث وعلومه — الصفحة الرئيسية"
-            className="brand"
-            href="/"
-          >
-            <Image
-              alt="شعار كلية الحديث وعلومه"
-              className="brand-emblem"
-              height={58}
-              loading="eager"
-              src="/brand/hadith-college-logo-128.png"
-              width={58}
-            />
-            <span className="brand-copy">
-              <b>كلية الحديث وعلومه</b>
-              <small>للرواية والدراية والتحقيق</small>
-            </span>
+          <Link aria-label="كلية الحديث وعلومه — الصفحة الرئيسية" className="brand" href="/">
+            <Image alt="شعار كلية الحديث وعلومه" className="brand-emblem" height={58} loading="eager" src="/brand/hadith-college-logo-128.png" width={58} />
+            <span className="brand-copy"><b>كلية الحديث وعلومه</b><small>للرواية والدراية والتحقيق</small></span>
           </Link>
-          <ul
-            aria-label="التنقل الرئيسي"
-            className={`nav-links ${mobileOpen ? "open" : ""}`}
-          >
-            {managementNavigation.map((item) => (
-              <NavigationItem item={item} key={item.label} />
-            ))}
+          <ul aria-label="التنقل الرئيسي" className={`nav-links ${mobileOpen ? "open" : ""}`}>
+            {managementNavigation.map((item) => <NavigationItem item={item} key={item.label} />)}
           </ul>
           <div className="nav-actions">
-            <Link className="btn gold legacy-student-login" href="/dashboard/student">
-              دخول الطالب
-            </Link>
-            <button
-              aria-expanded={mobileOpen}
-              aria-label="فتح القائمة"
-              className="menu-toggle"
-              onClick={() => setMobileOpen((value) => !value)}
-              type="button"
-            >
-              ☰
-            </button>
+            <Link className="btn gold legacy-student-login" href="/dashboard/student">دخول الطالب</Link>
+            <button aria-expanded={mobileOpen} aria-label="فتح القائمة" className="menu-toggle" onClick={() => setMobileOpen((value) => !value)} type="button">☰</button>
           </div>
         </div>
       </header>

@@ -1,86 +1,18 @@
 @import "../styles/site.css";
+@import "../styles/approved-index.css";
 
-:root {
-  color-scheme: light;
-}
-
-* {
-  box-sizing: border-box;
-}
-
-html {
-  direction: rtl;
-}
-
-body {
-  margin: 0;
-}
-
-.platform-note {
-  border: 1px solid rgba(159, 117, 46, 0.28);
-  background: rgba(247, 240, 224, 0.72);
-  color: #47391f;
-  padding: 14px 16px;
-  border-radius: 8px;
-  line-height: 1.8;
-}
-
-.route-shell {
-  min-height: 58vh;
-}
-
-.dashboard-grid {
-  display: grid;
-  grid-template-columns: repeat(3, minmax(0, 1fr));
-  gap: 16px;
-}
-
-.dashboard-layout-next {
-  min-height: 100vh;
-  background: #f7f2e9;
-}
-
-.dashboard-shell {
-  display: grid;
-  grid-template-columns: 280px minmax(0, 1fr);
-  min-height: 100vh;
-}
-
-.dashboard-main {
-  padding: 24px;
-}
-
-.dashboard-panel-grid {
-  display: grid;
-  grid-template-columns: repeat(2, minmax(0, 1fr));
-  gap: 16px;
-}
-
-.status-list {
-  display: grid;
-  gap: 10px;
-  padding: 0;
-  margin: 0;
-  list-style: none;
-}
-
-.status-list li {
-  display: flex;
-  justify-content: space-between;
-  gap: 16px;
-  border-bottom: 1px solid rgba(42, 56, 44, 0.12);
-  padding-bottom: 10px;
-}
-
-.tag.demo {
-  background: rgba(98, 76, 37, 0.08);
-  color: #6b4d1f;
-}
-
-@media (max-width: 900px) {
-  .dashboard-shell,
-  .dashboard-grid,
-  .dashboard-panel-grid {
-    grid-template-columns: 1fr;
-  }
-}
+:root { color-scheme: light; }
+* { box-sizing: border-box; }
+html { direction: rtl; }
+body { margin: 0; }
+.platform-note { border: 1px solid rgba(159,117,46,.28); background: rgba(247,240,224,.72); color:#47391f; padding:14px 16px; border-radius:8px; line-height:1.8; }
+.route-shell { min-height:58vh; }
+.dashboard-grid { display:grid; grid-template-columns:repeat(3,minmax(0,1fr)); gap:16px; }
+.dashboard-layout-next { min-height:100vh; background:#f7f2e9; }
+.dashboard-shell { display:grid; grid-template-columns:280px minmax(0,1fr); min-height:100vh; }
+.dashboard-main { padding:24px; }
+.dashboard-panel-grid { display:grid; grid-template-columns:repeat(2,minmax(0,1fr)); gap:16px; }
+.status-list { display:grid; gap:10px; padding:0; margin:0; list-style:none; }
+.status-list li { display:flex; justify-content:space-between; gap:16px; border-bottom:1px solid rgba(42,56,44,.12); padding-bottom:10px; }
+.tag.demo { background:rgba(98,76,37,.08); color:#6b4d1f; }
+@media(max-width:900px){.dashboard-shell,.dashboard-grid,.dashboard-panel-grid{grid-template-columns:1fr}}
