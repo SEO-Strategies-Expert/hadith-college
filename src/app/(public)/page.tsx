@@ -1,5 +1,6 @@
 import Image from "next/image";
 import Link from "next/link";
+import type { ReactNode } from "react";
 import { PublicLayout } from "@/components/public/PublicLayout";
 import { listPublishedPrograms } from "@/lib/academic/academic-core";
 import { getHomeHero } from "@/lib/content/home";
@@ -73,6 +74,20 @@ function BookIcon() {
   );
 }
 
+function HeroSection({ title, lead, primaryHref, primaryLabel, secondaryHref, secondaryLabel }: { title: string; lead: string; primaryHref: string; primaryLabel: string; secondaryHref: string; secondaryLabel: string }) {
+  return <section className="hero premium-hero"><div className="container hero-grid"><div className="hero-copy reveal visible"><span className="section-kicker">كلية الحديث وعلومه</span><h1>{title}</h1><p className="lead">{lead}</p><div className="hero-points"><span>مسارات متدرجة</span><span>تعلم بالممارسة</span><span>مكتبة وقاعدة بيانات</span></div><div className="button-row"><Link className="btn gold" href={primaryHref}>{primaryLabel}</Link><Link className="btn ghost" href={secondaryHref}>{secondaryLabel}</Link></div></div><div className="hero-visual reveal visible"><div className="arch-stage"><div className="isnad-visual"><Image alt="شعار كلية الحديث وعلومه" className="isnad-mark" height={128} src="/brand/hadith-college-logo-128.png" width={128} /><h3>سندٌ متصل… ومنهجٌ محقق</h3><p>تتبع الرواية، اجمع الطرق، قارن النسخ، واكتب الحكم العلمي داخل بيئة تدريبية واحدة.</p><div className="chain"><div className="chain-row"><span>المصدر الأصلي</span><i /><span>طريق الرواية</span></div><div className="chain-row"><span>دراسة الرواة</span><i /><span>المقارنة والحكم</span></div></div></div></div><div className="floating-card fc-1"><b>مختبر التخريج</b><small>بحث · طرق · رواة · حكم</small></div><div className="floating-card fc-2"><b>مختبر التحقيق</b><small>صور · مقابلة · حواشٍ · إخراج</small></div><div className="floating-card fc-3"><b>إجازات موثقة</b><small>سجل رقمي ورمز تحقق</small></div></div></div></section>;
+}
+
+function TrustStrip({ children }: { children: ReactNode }) { return <section className="trust-strip">{children}</section>; }
+function AcademicProgramsSection({ children }: { children: ReactNode }) { return <section className="section">{children}</section>; }
+function ResearchLabSection({ children }: { children: ReactNode }) { return <section className="section dark">{children}</section>; }
+function StudentJourneySection({ children }: { children: ReactNode }) { return <section className="section">{children}</section>; }
+function LearningPathsSection({ children }: { children: ReactNode }) { return <section className="section compact">{children}</section>; }
+function FacultySection({ children }: { children: ReactNode }) { return <section className="section">{children}</section>; }
+function PublicationsSection({ children }: { children: ReactNode }) { return <section className="section">{children}</section>; }
+function ResearchResourcesSection({ children }: { children: ReactNode }) { return <section className="section">{children}</section>; }
+function AdmissionsCTA({ children }: { children: ReactNode }) { return <section className="section compact">{children}</section>; }
+
 export default async function HomePage() {
   const [hero, publishedPrograms] = await Promise.all([
     getHomeHero(),
@@ -91,64 +106,9 @@ export default async function HomePage() {
 
   return (
     <PublicLayout>
-      <section className="hero">
-        <div className="container hero-grid">
-          <div className="hero-copy reveal visible">
-            <h1>{hero.content.title_ar}</h1>
-            <p className="lead">{hero.content.lead_ar}</p>
-            <div className="hero-points">
-              <span>مسارات متدرجة</span>
-              <span>تعلم بالممارسة</span>
-              <span>مكتبة وقاعدة بيانات</span>
-            </div>
-            <div className="button-row">
-              <Link className="btn gold" href={hero.content.primary_href}>
-                {hero.content.primary_cta_ar}
-              </Link>
-              <Link className="btn ghost" href={hero.content.secondary_href}>
-                {hero.content.secondary_cta_ar}
-              </Link>
-            </div>
-          </div>
-          <div className="hero-visual reveal visible">
-            <div className="arch-stage">
-              <div className="isnad-visual">
-                <Image
-                  alt=""
-                  className="isnad-mark"
-                  height={128}
-                  src="/brand/hadith-college-logo-128.png"
-                  width={128}
-                />
-                <h3>سندٌ متصل… ومنهجٌ محقق</h3>
-                <p>
-                  تتبع الرواية، اجمع الطرق، قارن النسخ، واكتب الحكم العلمي داخل
-                  بيئة تدريبية واحدة.
-                </p>
-                <div className="chain">
-                  <div className="chain-row">
-                    <span>المصدر الأصلي</span><i /><span>طريق الرواية</span>
-                  </div>
-                  <div className="chain-row">
-                    <span>دراسة الرواة</span><i /><span>المقارنة والحكم</span>
-                  </div>
-                </div>
-              </div>
-            </div>
-            <div className="floating-card fc-1">
-              <b>مختبر التخريج</b><small>بحث · طرق · رواة · حكم</small>
-            </div>
-            <div className="floating-card fc-2">
-              <b>مختبر التحقيق</b><small>صور · مقابلة · حواشٍ · إخراج</small>
-            </div>
-            <div className="floating-card fc-3">
-              <b>إجازات موثقة</b><small>سجل رقمي ورمز تحقق</small>
-            </div>
-          </div>
-        </div>
-      </section>
+      <HeroSection lead={hero.content.lead_ar} primaryHref={hero.content.primary_href} primaryLabel={hero.content.primary_cta_ar} secondaryHref={hero.content.secondary_href} secondaryLabel={hero.content.secondary_cta_ar} title={hero.content.title_ar} />
 
-      <section className="trust-strip">
+      <TrustStrip>
         <div className="container">
           <div className="trust-grid">
             <div className="trust-item">
@@ -184,9 +144,9 @@ export default async function HomePage() {
             </div>
           </div>
         </div>
-      </section>
+      </TrustStrip>
 
-      <section className="section">
+      <AcademicProgramsSection>
         <div className="container">
           <div className="section-head reveal visible">
             <div className="copy">
@@ -225,9 +185,9 @@ export default async function HomePage() {
             ))}
           </div>
         </div>
-      </section>
+      </AcademicProgramsSection>
 
-      <section className="section dark">
+      <ResearchLabSection>
         <div className="container">
           <div className="section-head reveal visible">
             <div className="copy">
@@ -290,9 +250,9 @@ export default async function HomePage() {
             </article>
           </div>
         </div>
-      </section>
+      </ResearchLabSection>
 
-      <section className="section">
+      <StudentJourneySection>
         <div className="container">
           <div className="section-head reveal visible">
             <div className="copy">
@@ -314,9 +274,9 @@ export default async function HomePage() {
             ))}
           </div>
         </div>
-      </section>
+      </StudentJourneySection>
 
-      <section className="section compact">
+      <LearningPathsSection>
         <div className="container">
           <div className="metric-band reveal visible">
             <div className="metric"><b>4</b><span>مسارات أكاديمية متدرجة</span></div>
@@ -325,9 +285,9 @@ export default async function HomePage() {
             <div className="metric"><b>RTL</b><span>تجربة عربية أصيلة</span></div>
           </div>
         </div>
-      </section>
+      </LearningPathsSection>
 
-      <section className="section">
+      <FacultySection>
         <div className="container">
           <div className="section-head reveal visible">
             <div className="copy">
@@ -359,9 +319,9 @@ export default async function HomePage() {
             ))}
           </div>
         </div>
-      </section>
+      </FacultySection>
 
-      <section className="section">
+      <PublicationsSection>
         <div className="container">
           <div className="section-head reveal visible">
             <div className="copy">
@@ -394,9 +354,9 @@ export default async function HomePage() {
             ))}
           </div>
         </div>
-      </section>
+      </PublicationsSection>
 
-      <section className="section">
+      <ResearchResourcesSection>
         <div className="container">
           <div className="section-head reveal visible">
             <div className="copy">
@@ -421,9 +381,9 @@ export default async function HomePage() {
             ))}
           </div>
         </div>
-      </section>
+      </ResearchResourcesSection>
 
-      <section className="section compact">
+      <AdmissionsCTA>
         <div className="container">
           <div className="cta-panel reveal visible">
             <div>
@@ -436,7 +396,7 @@ export default async function HomePage() {
             </div>
           </div>
         </div>
-      </section>
+      </AdmissionsCTA>
     </PublicLayout>
   );
 }
