@@ -34,6 +34,35 @@ function DisabledItem({ item }: { item: ManagementNavChild }) {
   );
 }
 
+function NavigationChild({ item }: { item: ManagementNavChild }) {
+  const [open, setOpen] = useState(false);
+
+  if (item.disabled) return <DisabledItem item={item} />;
+
+  if (!item.children) {
+    return (
+      <Link href={item.href!}>
+        {item.icon ? <span aria-hidden="true" className="legacy-platform-icon"><SocialIcon name={item.icon} /></span> : null}
+        <span><b>{item.label}</b></span>
+      </Link>
+    );
+  }
+
+  return (
+    <div className={`legacy-nested-item ${open ? "is-open" : ""}`}>
+      <button aria-expanded={open} className="legacy-nested-trigger" onClick={() => setOpen((value) => !value)} type="button">
+        <span>{item.label}</span><span aria-hidden="true">⌄</span>
+      </button>
+      {open ? (
+        <div className="legacy-nested-menu">
+          {item.href ? <Link href={item.href}><span><b>نظرة عامة</b></span></Link> : null}
+          {item.children.map((child) => <NavigationChild item={child} key={child.label} />)}
+        </div>
+      ) : null}
+    </div>
+  );
+}
+
 function NavigationItem({ item }: { item: ManagementNavItem }) {
   const [open, setOpen] = useState(false);
   const [desktop, setDesktop] = useState(false);
@@ -105,16 +134,7 @@ function NavigationItem({ item }: { item: ManagementNavItem }) {
           <span><b>نظرة عامة</b><small>{item.label}</small></span>
         </Link>
       ) : null}
-      {item.children.map((child) =>
-        child.disabled ? (
-          <DisabledItem item={child} key={child.label} />
-        ) : (
-          <Link href={child.href!} key={child.label}>
-            {child.icon ? <span aria-hidden="true" className="legacy-platform-icon"><SocialIcon name={child.icon} /></span> : null}
-            <span><b>{child.label}</b></span>
-          </Link>
-        ),
-      )}
+      {item.children.map((child) => <NavigationChild item={child} key={child.label} />)}
     </div>
   );
 

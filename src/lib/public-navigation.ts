@@ -5,6 +5,7 @@ export type ManagementNavChild = {
   href?: string;
   icon?: SocialIconName;
   disabled?: boolean;
+  children?: ManagementNavChild[];
 };
 
 export type ManagementNavItem = {
@@ -32,51 +33,71 @@ export const managementNavigation: ManagementNavItem[] = [
     href: "/about",
     children: [
       { label: "الرسالة والرؤية والأهداف", href: "/about/mission-vision" },
-      { label: "قالوا عن الكلية", href: "/about/testimonials" }
+      { label: "قالوا عن الكلية", href: "/about/testimonials" },
+      {
+        label: "الهيئة العلمية",
+        children: [
+          { label: "أعضاء هيئة التدريس", href: "/scientific-body/faculty" },
+          { label: "المجلس العلمي", href: "/scientific-body/scientific-council" }
+        ]
+      }
+    ]
+  },
+  {
+    label: "الدراسة والبرامج",
+    children: [
+      {
+        label: "البرامج الأكاديمية",
+        href: "/programs",
+        children: [
+          { label: "برنامج البكالوريوس", href: "/programs/bachelor" },
+          { label: "برنامج الماجستير", href: "/programs/master" },
+          { label: "برنامج الدكتوراه", href: "/programs/doctorate" }
+        ]
+      },
+      { label: "الدبلومات", href: "/diplomas" },
+      { label: "الدورات", href: "/courses" },
+      { label: "مناهج الدراسة", href: "/curricula" },
+      { label: "الرسوم", href: "/fees" }
+    ]
+  },
+  {
+    label: "البحث والمختبرات",
+    children: [
+      { label: "مختبر التخريج", href: "/research/takhrij-lab" },
+      {
+        label: "المواقع البحثية الحديثية",
+        href: "/research/hadith-sites",
+        children: [
+          { label: "الباحث الحديثي", disabled: true },
+          { label: "الدرر السنية", disabled: true },
+          { label: "المكتبة الشاملة", disabled: true }
+        ]
+      }
+    ]
+  },
+  {
+    label: "المحتوى والإصدارات",
+    children: [
+      {
+        label: "المجلة العلمية",
+        children: [
+          { label: "الهيئة الاستشارية", href: "/journal/advisory-board" },
+          { label: "الأبحاث", href: "/journal/research" }
+        ]
+      },
+      { label: "أبحاث مُحَكَّمة ومنشورة", href: "/research/peer-reviewed" },
+      { label: "الكتب والكورسات المدفوعة", href: "/store" }
+    ]
+  },
+  {
+    label: "الأخبار والبث",
+    children: [
+      { label: "البث", href: "/live" },
+      { label: "الأخبار", href: "/news" }
     ]
   },
   { label: "روابط الكلية", children: disabledSocials },
-  { label: "البث", href: "/live", icon: "◉" },
-  {
-    label: "البرامج",
-    href: "/programs",
-    children: [
-      { label: "برنامج البكالوريوس", href: "/programs/bachelor" },
-      { label: "برنامج الماجستير", href: "/programs/master" },
-      { label: "برنامج الدكتوراه", href: "/programs/doctorate" }
-    ]
-  },
-  { label: "الدبلومات", href: "/diplomas" },
-  { label: "الدورات", href: "/courses" },
-  { label: "مختبر التخريج", href: "/research/takhrij-lab" },
-  { label: "مناهج الدراسة", href: "/curricula" },
-  { label: "الرسوم", href: "/fees" },
-  { label: "الكتب والكورسات المدفوعة", href: "/store" },
-  {
-    label: "المواقع البحثية الحديثية",
-    href: "/research/hadith-sites",
-    children: [
-      { label: "الباحث الحديثي", disabled: true },
-      { label: "الدرر السنية", disabled: true },
-      { label: "المكتبة الشاملة", disabled: true }
-    ]
-  },
-  {
-    label: "الهيئة العلمية",
-    children: [
-      { label: "أعضاء هيئة التدريس", href: "/scientific-body/faculty" },
-      { label: "المجلس العلمي", href: "/scientific-body/scientific-council" }
-    ]
-  },
-  {
-    label: "المجلة العلمية",
-    children: [
-      { label: "الهيئة الاستشارية", href: "/journal/advisory-board" },
-      { label: "الأبحاث", href: "/journal/research" }
-    ]
-  },
-  { label: "أبحاث مُحَكَّمة ومنشورة", href: "/research/peer-reviewed" },
-  { label: "الأخبار", href: "/news" },
   {
     label: "جامعة أبو بكر إبراهيم",
     href: "/about/university",
