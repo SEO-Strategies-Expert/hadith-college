@@ -1,5 +1,6 @@
 @import "../styles/site.css";
 @import "../styles/approved-index.css";
+@import "../styles/premium-stage-one.css";
 
 :root { color-scheme: light; }
 * { box-sizing: border-box; }
