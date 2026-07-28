@@ -156,6 +156,7 @@ function NavigationItem({ item }: { item: ManagementNavItem }) {
       onMouseLeave={scheduleDesktopClose}
     >
       <button aria-expanded={open} aria-haspopup="true" className="nav-link-button" onClick={toggleMenu} ref={buttonRef} type="button">
+        {item.university ? <Image alt="" aria-hidden="true" className="university-nav-logo" height={24} src="/brand/aboubacar-ibrahim-university-icon-64.png" width={24} /> : null}
         {item.label} <span aria-hidden="true">⌄</span>
       </button>
       {desktop ? (open ? createPortal(menu, document.body) : null) : menu}
@@ -176,18 +177,8 @@ export function Header() {
               <Image alt="شعار كلية الحديث وعلومه" className="brand-emblem" height={58} loading="eager" src="/brand/hadith-college-logo-128.png" width={58} />
               <span className="brand-copy"><b>كلية الحديث وعلومه</b><small>للرواية والدراية والتحقيق</small></span>
             </Link>
-            <Link className="header-university-accreditation" href="/about/university">
-              <Image alt="" aria-hidden="true" height={26} src="/brand/aboubacar-ibrahim-university-icon-64.png" width={26} />
-              <span>معتمدة من جامعة أبو بكر إبراهيم</span>
-            </Link>
           </div>
           <ul aria-label="التنقل الرئيسي" className={`nav-links ${mobileOpen ? "open" : ""}`}>
-            <li className="mobile-university-accreditation">
-              <Link href="/about/university">
-                <Image alt="" aria-hidden="true" height={26} src="/brand/aboubacar-ibrahim-university-icon-64.png" width={26} />
-                <span>معتمدة من جامعة أبو بكر إبراهيم</span>
-              </Link>
-            </li>
             <li className="mobile-student-login"><Link href="/dashboard/student">دخول الطالب</Link></li>
             {managementNavigation.map((item) => <NavigationItem item={item} key={item.label} />)}
           </ul>

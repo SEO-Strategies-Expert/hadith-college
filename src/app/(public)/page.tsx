@@ -94,10 +94,6 @@ export default async function HomePage() {
       <section className="hero">
         <div className="container hero-grid">
           <div className="hero-copy reveal visible">
-            <span className="eyebrow">
-              <i />
-              {hero.content.eyebrow_ar}
-            </span>
             <h1>{hero.content.title_ar}</h1>
             <p className="lead">{hero.content.lead_ar}</p>
             <div className="hero-points">
