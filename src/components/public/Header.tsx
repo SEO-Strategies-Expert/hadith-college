@@ -42,7 +42,7 @@ function NavigationItem({ item }: { item: ManagementNavItem }) {
   const closeTimerRef = useRef<ReturnType<typeof setTimeout> | null>(null);
 
   useEffect(() => {
-    const update = () => setDesktop(window.innerWidth > 1780);
+    const update = () => setDesktop(window.innerWidth > 2560);
     update();
     window.addEventListener("resize", update);
     return () => {
