@@ -16,6 +16,7 @@
 .public-site .legacy-student-login { height:46px; padding-inline:20px; border-radius:16px; font-size:15px; background:linear-gradient(135deg,var(--premium-gold-light),var(--premium-gold)); box-shadow:0 14px 30px rgba(198,154,31,.23); }
 .public-site .university-nav-logo { width:23px; height:23px; }
 .public-site .legacy-floating-menu { border-color:var(--premium-line); border-radius:22px; box-shadow:var(--premium-shadow); }
+.public-site .mobile-menu-backdrop { display:none; }
 
 /* Homepage */
 .public-site .hero { min-height:680px; background:radial-gradient(circle at 70% 35%,rgba(234,212,133,.34),transparent 32%),linear-gradient(135deg,#f7f1e4,#e9eee7); }
@@ -45,5 +46,6 @@
 .public-site a:focus-visible,.public-site button:focus-visible { outline:3px solid rgba(217,183,67,.72); outline-offset:3px; }
 
 /* Responsive */
-@media(max-width:1320px){ .public-site .nav-shell{min-height:80px}.public-site .nav-links.open{background:rgba(255,253,248,.98);border-color:var(--premium-line);box-shadow:var(--premium-shadow)} }
-@media(max-width:760px){ .public-site .container{width:min(1240px,calc(100% - 28px))}.public-site .nav-shell{min-height:74px}.public-site .site-header .brand-emblem{width:50px;height:50px}.public-site .brand-copy b{font-size:14px}.public-site .hero{min-height:auto}.public-site .hero-grid{padding:52px 0;gap:34px}.public-site .hero-copy h1{font-size:38px}.public-site .hero-copy .lead{font-size:16px}.public-site .section{padding:66px 0}.public-site .trust-item{border-left:0;border-bottom:1px solid var(--premium-line)} }
+@media(max-width:1320px){ .public-site .nav-shell{min-height:80px}.public-site .nav-links.open{background:rgba(255,253,248,.98);border-color:var(--premium-line);box-shadow:var(--premium-shadow);max-height:calc(100vh - 96px);overflow-y:auto}.public-site .mobile-menu-backdrop{display:block;position:fixed;inset:0;z-index:45;border:0;background:rgba(4,25,19,.58);backdrop-filter:blur(3px)}.public-site .site-header.mobile-menu-open{z-index:60}.public-site .site-header.mobile-menu-open~.route-shell{overflow:hidden} }
+@media(min-width:761px) and (max-width:1024px){.public-site .hero{min-height:0}.public-site .hero-grid{padding:48px 0;gap:34px}.public-site .hero-visual{min-height:420px}.public-site .hero-copy h1{font-size:48px}}
+@media(max-width:760px){ .public-site .container{width:min(1240px,calc(100% - 28px))}.public-site .nav-shell{min-height:74px}.public-site .site-header .brand-emblem{width:50px;height:50px}.public-site .brand-copy b{font-size:14px}.public-site .hero{min-height:auto}.public-site .hero-grid{padding:48px 0;gap:28px}.public-site .hero-copy h1{font-size:38px}.public-site .hero-copy .lead{font-size:16px}.public-site .hero-visual{min-height:360px}.public-site .section{padding:54px 0}.public-site .card{border-radius:20px}.public-site .trust-item{border-left:0;border-bottom:1px solid var(--premium-line)} }

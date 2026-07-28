@@ -7,7 +7,7 @@ import { HeroContent, heroContentSchema } from "@/lib/validations/content";
 export const fallbackHero: HeroContent = {
   eyebrow_ar: "جامعة أبو بكر إبراهيم",
   title_ar: "كلية الحديث وعلومه",
-  lead_ar: "منصة عربية متخصصة في الرواية والدراية والتحقيق، تنتقل الآن من عرض Static إلى منصة Next.js قابلة للإدارة.",
+  lead_ar: "منصة أكاديمية متخصصة في علوم الحديث، تجمع بين التأصيل العلمي والتدريب التطبيقي والبحث المنهجي.",
   primary_cta_ar: "قدّم الآن",
   primary_href: "/admissions",
   secondary_cta_ar: "استعرض البرامج",

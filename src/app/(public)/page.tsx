@@ -82,7 +82,6 @@ function TrustStrip({ children }: { children: ReactNode }) { return <section cla
 function AcademicProgramsSection({ children }: { children: ReactNode }) { return <section className="section">{children}</section>; }
 function ResearchLabSection({ children }: { children: ReactNode }) { return <section className="section dark">{children}</section>; }
 function StudentJourneySection({ children }: { children: ReactNode }) { return <section className="section">{children}</section>; }
-function LearningPathsSection({ children }: { children: ReactNode }) { return <section className="section compact">{children}</section>; }
 function FacultySection({ children }: { children: ReactNode }) { return <section className="section">{children}</section>; }
 function PublicationsSection({ children }: { children: ReactNode }) { return <section className="section">{children}</section>; }
 function ResearchResourcesSection({ children }: { children: ReactNode }) { return <section className="section">{children}</section>; }
@@ -276,17 +275,6 @@ export default async function HomePage() {
         </div>
       </StudentJourneySection>
 
-      <LearningPathsSection>
-        <div className="container">
-          <div className="metric-band reveal visible">
-            <div className="metric"><b>4</b><span>مسارات أكاديمية متدرجة</span></div>
-            <div className="metric"><b>2</b><span>مختبران تطبيقيان</span></div>
-            <div className="metric"><b>1</b><span>قاعدة معرفة موحدة</span></div>
-            <div className="metric"><b>RTL</b><span>تجربة عربية أصيلة</span></div>
-          </div>
-        </div>
-      </LearningPathsSection>
-
       <FacultySection>
         <div className="container">
           <div className="section-head reveal visible">
@@ -304,12 +292,12 @@ export default async function HomePage() {
           </div>
           <div className="grid-3">
             {[
-              ["المجلس العلمي", "رئيس المجلس العلمي", "الإشراف على المنهج، المعايير العلمية، والإجازات."],
-              ["التخريج والأسانيد", "أستاذ المسار التخصصي", "دراسة الرواة والطرق والعلل والتطبيقات العملية."],
-              ["تحقيق التراث", "أستاذ علوم المخطوطات", "قراءة النسخ، المقابلة، التوثيق وصناعة النص المحقق."],
+              ["مجالات الإشراف العلمي", "المناهج والمعايير", "إشراف منهجي على المسارات والمخرجات العلمية."],
+              ["مجالات الإشراف العلمي", "التخريج والأسانيد", "دراسة الرواة والطرق والعلل والتطبيقات العملية."],
+              ["مجالات الإشراف العلمي", "تحقيق التراث", "قراءة النسخ والمقابلة والتوثيق وصناعة النص المحقق."],
             ].map(([tag, title, description]) => (
               <article className="card profile-card reveal visible" key={title}>
-                <div className="profile-art" />
+                <div aria-hidden="true" className="profile-art">⌘</div>
                 <div className="profile-body">
                   <span className="tag">{tag}</span>
                   <h3>{title}</h3>
@@ -338,9 +326,9 @@ export default async function HomePage() {
           </div>
           <div className="grid-3">
             {[
-              ["", "دليل علمي", "قراءة 8 دقائق", "كيف تبدأ تخريج حديث بطريقة منهجية؟", "خريطة عملية من تحديد النص حتى جمع الطرق وصياغة النتيجة."],
-              ["gold", "علوم المخطوطات", "ملف تطبيقي", "المقابلة بين النسخ: قواعد وأخطاء شائعة", "مبادئ اختيار النسخة الأم وإثبات الفروق وصناعة الحاشية."],
-              ["paper", "مجلة الكلية", "العدد التمهيدي", "بحوث في الرواية والدراية والتحقيق", "ملف تمهيدي يوضح محاور المجلة ومعايير النشر العلمي."],
+              ["", "مركز الإصدارات", "قيد النشر", "مواد علمية وإصدارات الكلية", "ستظهر المقالات والأبحاث المنشورة هنا بعد اعتمادها من إدارة المحتوى."],
+              ["gold", "علوم المخطوطات", "قيد النشر", "أدلة التحقيق والتوثيق", "ستظهر الأدلة المعتمدة عند نشرها من إدارة المحتوى."],
+              ["paper", "المجلة العلمية", "قيد النشر", "الأبحاث والأعداد", "لا توجد أبحاث أو أعداد منشورة للعرض حاليًا."],
             ].map(([cover, category, meta, title, description]) => (
               <article className="card news-card reveal visible" key={title}>
                 <div className={`news-cover ${cover}`} />

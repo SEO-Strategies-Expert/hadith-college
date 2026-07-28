@@ -167,10 +167,17 @@ function NavigationItem({ item }: { item: ManagementNavItem }) {
 export function Header() {
   const [mobileOpen, setMobileOpen] = useState(false);
 
+  useEffect(() => {
+    if (!mobileOpen) return;
+    const previousOverflow = document.body.style.overflow;
+    document.body.style.overflow = "hidden";
+    return () => { document.body.style.overflow = previousOverflow; };
+  }, [mobileOpen]);
+
   return (
     <>
       <a className="skip-link" href="#main">انتقل إلى المحتوى</a>
-      <header className="site-header">
+      <header className={`site-header ${mobileOpen ? "mobile-menu-open" : ""}`}>
         <div className="container nav-shell">
           <div className="brand-column">
             <Link aria-label="كلية الحديث وعلومه — الصفحة الرئيسية" className="brand" href="/">
@@ -178,16 +185,17 @@ export function Header() {
               <span className="brand-copy"><b>كلية الحديث وعلومه</b><small>للرواية والدراية والتحقيق</small></span>
             </Link>
           </div>
-          <ul aria-label="التنقل الرئيسي" className={`nav-links ${mobileOpen ? "open" : ""}`}>
+          <ul aria-label="التنقل الرئيسي" className={`nav-links ${mobileOpen ? "open" : ""}`} onClick={() => setMobileOpen(false)}>
             <li className="mobile-student-login"><Link href="/dashboard/student">دخول الطالب</Link></li>
             {managementNavigation.map((item) => <NavigationItem item={item} key={item.label} />)}
           </ul>
           <div className="nav-actions">
             <Link className="btn gold legacy-student-login" href="/dashboard/student">دخول الطالب</Link>
-            <button aria-expanded={mobileOpen} aria-label="فتح القائمة" className="menu-toggle" onClick={() => setMobileOpen((value) => !value)} type="button">☰</button>
+            <button aria-expanded={mobileOpen} aria-label={mobileOpen ? "إغلاق القائمة" : "فتح القائمة"} className="menu-toggle" onClick={() => setMobileOpen((value) => !value)} type="button">{mobileOpen ? "×" : "☰"}</button>
           </div>
         </div>
       </header>
+      {mobileOpen ? <button aria-label="إغلاق القائمة" className="mobile-menu-backdrop" onClick={() => setMobileOpen(false)} type="button" /> : null}
     </>
   );
 }
