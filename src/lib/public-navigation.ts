@@ -47,7 +47,6 @@ export const managementNavigation: ManagementNavItem[] = [
   { label: "الدبلومات", href: "/diplomas" },
   { label: "الدورات", href: "/courses" },
   { label: "مختبر التخريج", href: "/research/takhrij-lab" },
-  { label: "دخول الطالب", href: "/dashboard/student", featured: true },
   { label: "مناهج الدراسة", href: "/curricula" },
   { label: "الرسوم", href: "/fees" },
   { label: "الكتب والكورسات المدفوعة", href: "/store" },
@@ -57,7 +56,7 @@ export const managementNavigation: ManagementNavItem[] = [
     children: [
       { label: "الباحث الحديثي", disabled: true },
       { label: "الدرر السنية", disabled: true },
-      { label: "الشاملة", disabled: true }
+      { label: "المكتبة الشاملة", disabled: true }
     ]
   },
   {
@@ -81,9 +80,8 @@ export const managementNavigation: ManagementNavItem[] = [
     href: "/about/university",
     university: true,
     children: [
-      { label: "عن الجامعة", href: "/about/university" },
       { label: "منصة الجامعة", disabled: true },
-      ...disabledSocials.map((item) => ({ ...item, label: `${item.label} الجامعة` }))
+      { label: "صفحات التواصل", disabled: true }
     ]
   }
 ];
