@@ -1,5 +1,5 @@
 import Link from "next/link";
-import { PageHero } from "@/components/public/PageHero";
+import { LegacyStaticSections } from "@/components/public/LegacyStaticSections";
 import { PublicLayout } from "@/components/public/PublicLayout";
 import { listPublishedFaculty } from "@/lib/academic/academic-core";
 
@@ -7,8 +7,8 @@ export default async function FacultyPublicPage() {
   const faculty = await listPublishedFaculty();
   return (
     <PublicLayout>
-      <PageHero title="الهيئة العلمية" lead="أعضاء هيئة التدريس المنشورون من لوحة الإدارة." />
-      <section className="section"><div className="container record-grid">
+      <LegacyStaticSections route="faculty" />
+      {faculty.length ? <section className="section"><div className="container record-grid">
         {faculty.map((item: { id: string; full_name_ar: string; slug: string; academic_title: string | null; specialization: string | null; bio_short: string | null }) => (
           <article className="card" key={item.id}>
             <span className="tag demo">{item.academic_title ?? "عضو هيئة تدريس"}</span>
@@ -18,8 +18,7 @@ export default async function FacultyPublicPage() {
             <Link className="text-link" href={`/faculty/${item.slug}`}>عرض الملف</Link>
           </article>
         ))}
-        {faculty.length === 0 ? <p className="notice">لا توجد ملفات منشورة حاليًا.</p> : null}
-      </div></section>
+      </div></section> : null}
     </PublicLayout>
   );
 }

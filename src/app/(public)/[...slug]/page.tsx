@@ -4,6 +4,7 @@ import { PublicLayout } from "@/components/public/PublicLayout";
 import { publicPages } from "@/lib/demo-data";
 import { listPublishedPrograms } from "@/lib/academic/academic-core";
 import Link from "next/link";
+import { hasLegacyStaticSections, LegacyStaticSections } from "@/components/public/LegacyStaticSections";
 
 export function generateStaticParams() {
   return publicPages.map((page) => ({ slug: page.slug.split("/") }));
@@ -21,6 +22,7 @@ export default async function PublicContentPage({ params }: { params: Promise<{ 
   const path = slug.join("/");
   const page = publicPages.find((item) => item.slug === path);
   if (!page) notFound();
+  if (hasLegacyStaticSections(path)) return <PublicLayout><LegacyStaticSections route={path} /></PublicLayout>;
   const programs = path === "curricula" ? await listPublishedPrograms() : [];
   const links = related[path] ?? [];
 
