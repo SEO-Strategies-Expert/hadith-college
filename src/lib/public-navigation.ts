@@ -1,7 +1,9 @@
+export type SocialIconName = "youtube" | "facebook" | "x" | "instagram" | "telegram" | "link";
+
 export type ManagementNavChild = {
   label: string;
   href?: string;
-  icon?: string;
+  icon?: SocialIconName;
   disabled?: boolean;
 };
 
@@ -15,12 +17,12 @@ export type ManagementNavItem = {
 };
 
 const disabledSocials: ManagementNavChild[] = [
-  { label: "YouTube", icon: "YT", disabled: true },
-  { label: "Facebook", icon: "f", disabled: true },
-  { label: "X", icon: "X", disabled: true },
-  { label: "Instagram", icon: "◎", disabled: true },
-  { label: "Telegram", icon: "✈", disabled: true },
-  { label: "أخرى", icon: "+", disabled: true }
+  { label: "YouTube", icon: "youtube", disabled: true },
+  { label: "Facebook", icon: "facebook", disabled: true },
+  { label: "X", icon: "x", disabled: true },
+  { label: "Instagram", icon: "instagram", disabled: true },
+  { label: "Telegram", icon: "telegram", disabled: true },
+  { label: "أخرى", icon: "link", disabled: true }
 ];
 
 export const managementNavigation: ManagementNavItem[] = [

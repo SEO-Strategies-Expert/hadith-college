@@ -1,10 +1,12 @@
 import Image from "next/image";
 import Link from "next/link";
+import { SocialIcon } from "@/components/public/SocialIcon";
+import type { SocialIconName } from "@/lib/public-navigation";
 
-const unavailableSocials = [
-  { label: "X", icon: "X" },
-  { label: "Instagram", icon: "◎" },
-  { label: "YouTube", icon: "▶" },
+const unavailableSocials: { label: string; icon: SocialIconName }[] = [
+  { label: "X", icon: "x" },
+  { label: "Instagram", icon: "instagram" },
+  { label: "YouTube", icon: "youtube" },
 ];
 
 export function Footer() {
@@ -38,7 +40,7 @@ export function Footer() {
                 role="link"
                 title="سيتم إضافة الرابط من إدارة الكلية"
               >
-                {social.icon}
+                <SocialIcon name={social.icon} />
               </span>
             ))}
           </div>

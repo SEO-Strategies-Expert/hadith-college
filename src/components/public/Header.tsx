@@ -4,6 +4,7 @@ import Image from "next/image";
 import Link from "next/link";
 import { useEffect, useRef, useState } from "react";
 import { createPortal } from "react-dom";
+import { SocialIcon } from "@/components/public/SocialIcon";
 import {
   managementNavigation,
   type ManagementNavChild,
@@ -22,7 +23,7 @@ function DisabledItem({ item }: { item: ManagementNavChild }) {
     >
       {item.icon ? (
         <span aria-hidden="true" className="legacy-platform-icon">
-          {item.icon}
+          <SocialIcon name={item.icon} />
         </span>
       ) : null}
       <span>
@@ -109,7 +110,7 @@ function NavigationItem({ item }: { item: ManagementNavItem }) {
           <DisabledItem item={child} key={child.label} />
         ) : (
           <Link href={child.href!} key={child.label}>
-            {child.icon ? <span aria-hidden="true" className="legacy-platform-icon">{child.icon}</span> : null}
+            {child.icon ? <span aria-hidden="true" className="legacy-platform-icon"><SocialIcon name={child.icon} /></span> : null}
             <span><b>{child.label}</b></span>
           </Link>
         ),

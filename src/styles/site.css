@@ -55,7 +55,7 @@ a{color:inherit;text-decoration:none}button,input,select,textarea{font:inherit}.
 .legacy-platform-icon{width:36px;height:36px;display:grid;place-items:center;border-radius:12px;background:linear-gradient(145deg,var(--green-800),var(--green-950));color:var(--gold-300);flex:0 0 auto}
 .legacy-broadcast-link span{color:#a8453b}
 .legacy-student-login{white-space:nowrap}
-.socials span{width:34px;height:34px;display:grid;place-items:center;border-radius:10px;background:rgba(255,255,255,.08);color:rgba(255,255,255,.38);cursor:not-allowed}
+.socials span{width:34px;height:34px;display:grid;place-items:center;border-radius:10px;background:rgba(255,255,255,.08);color:rgba(255,255,255,.38);cursor:not-allowed}.socials .social-icon{width:17px;height:17px}.socials .social-icon--youtube{color:#ff4b62}.socials .social-icon--facebook{color:#6aa8ff}.socials .social-icon--x{color:#fff}.socials .social-icon--instagram{color:#f48abb}.socials .social-icon--telegram{color:#6ec6ff}
 .empty-state{background:var(--paper);border:1px dashed var(--line);border-radius:20px;padding:34px;text-align:center}
 .feature-columns{display:grid;grid-template-columns:repeat(3,1fr);gap:14px}.feature-columns article{background:var(--paper);border:1px solid var(--line);border-radius:20px;padding:22px}
 .university-public-card{text-align:center}.university-public-card img{width:min(256px,100%);height:auto;object-fit:contain;background:transparent;border:0;border-radius:0}
