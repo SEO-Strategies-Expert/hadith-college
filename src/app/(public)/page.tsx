@@ -75,7 +75,7 @@ function BookIcon() {
 }
 
 function HeroSection({ title, lead, primaryHref, primaryLabel, secondaryHref, secondaryLabel }: { title: string; lead: string; primaryHref: string; primaryLabel: string; secondaryHref: string; secondaryLabel: string }) {
-  return <section className="hero premium-hero"><div className="container hero-grid"><div className="hero-copy reveal visible"><span className="section-kicker">كلية الحديث وعلومه</span><h1>{title}</h1><p className="lead">{lead}</p><div className="hero-points"><span>مسارات متدرجة</span><span>تعلم بالممارسة</span><span>مكتبة وقاعدة بيانات</span></div><div className="button-row"><Link className="btn gold" href={primaryHref}>{primaryLabel}</Link><Link className="btn ghost" href={secondaryHref}>{secondaryLabel}</Link></div></div><div className="hero-visual reveal visible"><div className="arch-stage"><div className="isnad-visual"><Image alt="شعار كلية الحديث وعلومه" className="isnad-mark" height={128} src="/brand/hadith-college-logo-128.png" width={128} /><h3>سندٌ متصل… ومنهجٌ محقق</h3><p>تتبع الرواية، اجمع الطرق، قارن النسخ، واكتب الحكم العلمي داخل بيئة تدريبية واحدة.</p><div className="chain"><div className="chain-row"><span>المصدر الأصلي</span><i /><span>طريق الرواية</span></div><div className="chain-row"><span>دراسة الرواة</span><i /><span>المقارنة والحكم</span></div></div></div></div><div className="floating-card fc-1"><b>مختبر التخريج</b><small>بحث · طرق · رواة · حكم</small></div><div className="floating-card fc-2"><b>مختبر التحقيق</b><small>صور · مقابلة · حواشٍ · إخراج</small></div><div className="floating-card fc-3"><b>إجازات موثقة</b><small>سجل رقمي ورمز تحقق</small></div></div></div></section>;
+  return <section className="hero premium-hero"><div className="container hero-grid"><div className="hero-copy reveal visible"><span className="section-kicker">من الرواية إلى التحقيق… مسار علمي يصنع الباحث المتقن</span><h1>{title}</h1><p className="lead">{lead}</p><div className="hero-points"><span>مسارات متدرجة</span><span>تعلم بالممارسة</span><span>مكتبة وقاعدة بيانات</span></div><div className="button-row"><Link className="btn gold" href={primaryHref}>{primaryLabel}</Link><Link className="btn ghost" href={secondaryHref}>{secondaryLabel}</Link></div></div><div className="hero-visual reveal visible"><div className="arch-stage"><div className="isnad-visual"><Image alt="شعار كلية الحديث وعلومه" className="isnad-mark" height={128} src="/brand/hadith-college-logo-128.png" width={128} /><h3>سندٌ متصل… ومنهجٌ محقق</h3><p>تتبع الرواية، اجمع الطرق، قارن النسخ، واكتب الحكم العلمي داخل بيئة تدريبية واحدة.</p><div className="chain"><div className="chain-row"><span>المصدر الأصلي</span><i /><span>طريق الرواية</span></div><div className="chain-row"><span>دراسة الرواة</span><i /><span>المقارنة والحكم</span></div></div></div></div><div className="floating-card fc-1"><b>مختبر التخريج</b><small>بحث · طرق · رواة · حكم</small></div><div className="floating-card fc-2"><b>مختبر التحقيق</b><small>صور · مقابلة · حواشٍ · إخراج</small></div><div className="floating-card fc-3"><b>إجازات موثقة</b><small>سجل رقمي ورمز تحقق</small></div></div></div></section>;
 }
 
 function TrustStrip({ children }: { children: ReactNode }) { return <section className="trust-strip">{children}</section>; }
@@ -292,9 +292,9 @@ export default async function HomePage() {
           </div>
           <div className="grid-3">
             {[
-              ["مجالات الإشراف العلمي", "المناهج والمعايير", "إشراف منهجي على المسارات والمخرجات العلمية."],
-              ["مجالات الإشراف العلمي", "التخريج والأسانيد", "دراسة الرواة والطرق والعلل والتطبيقات العملية."],
-              ["مجالات الإشراف العلمي", "تحقيق التراث", "قراءة النسخ والمقابلة والتوثيق وصناعة النص المحقق."],
+              ["مجالات الإشراف العلمي", "رئيس المجلس العلمي", "اختصاص الإشراف على المنهج، والمعايير العلمية، والإجازات."],
+              ["مجالات الإشراف العلمي", "أستاذ المسار التخصصي", "اختصاص دراسة الرواة والطرق والعلل والتطبيقات العملية."],
+              ["مجالات الإشراف العلمي", "أستاذ علوم المخطوطات", "اختصاص قراءة النسخ والمقابلة والتوثيق وصناعة النص المحقق."],
             ].map(([tag, title, description]) => (
               <article className="card profile-card reveal visible" key={title}>
                 <div aria-hidden="true" className="profile-art">⌘</div>
@@ -326,9 +326,9 @@ export default async function HomePage() {
           </div>
           <div className="grid-3">
             {[
-              ["", "مركز الإصدارات", "قيد النشر", "مواد علمية وإصدارات الكلية", "ستظهر المقالات والأبحاث المنشورة هنا بعد اعتمادها من إدارة المحتوى."],
-              ["gold", "علوم المخطوطات", "قيد النشر", "أدلة التحقيق والتوثيق", "ستظهر الأدلة المعتمدة عند نشرها من إدارة المحتوى."],
-              ["paper", "المجلة العلمية", "قيد النشر", "الأبحاث والأعداد", "لا توجد أبحاث أو أعداد منشورة للعرض حاليًا."],
+              ["", "مركز الإصدارات", "موضوع قيد الإعداد", "كيف تبدأ تخريج حديث بطريقة منهجية؟", "خريطة عملية مرتقبة من تحديد النص حتى جمع الطرق وصياغة النتيجة."],
+              ["gold", "علوم المخطوطات", "محتوى مرتقب", "المقابلة بين النسخ: قواعد وأخطاء شائعة", "مادة تمهيدية مرتقبة حول اختيار النسخة الأم وإثبات الفروق وصناعة الحاشية."],
+              ["paper", "المجلة العلمية", "محتوى مرتقب", "بحوث في الرواية والدراية والتحقيق", "عرض تمهيدي مرتقب لمحاور المجلة ومعايير النشر العلمي."],
             ].map(([cover, category, meta, title, description]) => (
               <article className="card news-card reveal visible" key={title}>
                 <div className={`news-cover ${cover}`} />
@@ -336,7 +336,6 @@ export default async function HomePage() {
                   <div className="news-meta"><span>{category}</span><span>{meta}</span></div>
                   <h3>{title}</h3>
                   <p className="muted">{description}</p>
-                  <Link className="card-link" href="/journal/research">اقرأ المزيد</Link>
                 </div>
               </article>
             ))}
@@ -381,6 +380,7 @@ export default async function HomePage() {
             <div className="button-row">
               <Link className="btn gold" href="/admissions">القبول والتسجيل</Link>
               <Link className="btn ghost" href="/contact">تحدث مع مستشار القبول</Link>
+              <Link className="btn ghost" href="/fees">التعرف على الرسوم وسياسة القبول</Link>
             </div>
           </div>
         </div>
