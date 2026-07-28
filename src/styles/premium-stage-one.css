@@ -11,7 +11,7 @@
 .public-site .brand-copy b { font-family:'Noto Kufi Arabic',sans-serif; font-size:17px; line-height:1.45; }
 .public-site .brand-copy small { color:#916c13; font-size:11px; font-weight:700; }
 .public-site .nav-links { gap:2px; }
-.public-site .nav-links a,.public-site .nav-link-button { padding:12px 9px; color:#273b35; font-size:12.5px; font-weight:700; }
+.public-site .nav-links a,.public-site .nav-link-button { padding:12px 10px; color:#273b35; font-size:13.5px; font-weight:700; }
 .public-site .nav-links a:hover,.public-site .nav-link-button:hover,.public-site .nav-links li.dropdown-open>.nav-link-button { background:#fff; color:var(--premium-green); }
 .public-site .legacy-student-login { height:46px; padding-inline:20px; border-radius:16px; font-size:15px; background:linear-gradient(135deg,var(--premium-gold-light),var(--premium-gold)); box-shadow:0 14px 30px rgba(198,154,31,.23); }
 .public-site .university-nav-logo { width:23px; height:23px; }
@@ -20,9 +20,10 @@
 
 /* Homepage */
 .public-site .hero { min-height:680px; background:radial-gradient(circle at 70% 35%,rgba(234,212,133,.34),transparent 32%),linear-gradient(135deg,#f7f1e4,#e9eee7); }
-.public-site .hero-grid { gap:70px; padding:78px 0; }
+.public-site .hero-grid { gap:clamp(38px,5vw,70px); padding:78px 0; }
 .public-site .hero-copy h1 { font-family:'Noto Kufi Arabic',sans-serif; font-size:clamp(42px,5vw,72px); line-height:1.35; letter-spacing:-2px; }
 .public-site .hero-copy .lead { max-width:650px; color:#52645d; font-size:19px; line-height:2; }
+.public-site .hero-copy .section-kicker { color:#916c13; font-weight:800; }
 .public-site .hero-points span { border:1px solid var(--premium-line); border-radius:999px; background:rgba(255,255,255,.64); padding:8px 13px; }
 .public-site .button-row .btn { height:52px; padding-inline:25px; border-radius:17px; font-weight:800; }
 .public-site .button-row .btn.gold { background:var(--premium-emerald); color:#fff; box-shadow:0 18px 35px rgba(4,45,34,.22); }
@@ -39,7 +40,7 @@
 .public-site .card:hover { transform:translateY(-5px); box-shadow:var(--premium-shadow); }
 
 /* Footer and accessibility */
-.public-site .site-footer { background:var(--premium-ink); color:#eff4ee; }
+.public-site .site-footer { background:linear-gradient(145deg,#061f18,#0a3026); color:#eff4ee; }
 .public-site .footer-main { padding:72px 0 48px; }
 .public-site .footer-main a:hover { color:var(--premium-gold-light); }
 .public-site .footer-bottom { border-color:rgba(255,255,255,.12); }
@@ -47,5 +48,5 @@
 
 /* Responsive */
 @media(max-width:1320px){ .public-site .nav-shell{min-height:80px}.public-site .nav-links.open{background:rgba(255,253,248,.98);border-color:var(--premium-line);box-shadow:var(--premium-shadow);max-height:calc(100vh - 96px);overflow-y:auto}.public-site .mobile-menu-backdrop{display:block;position:fixed;inset:0;z-index:45;border:0;background:rgba(4,25,19,.58);backdrop-filter:blur(3px)}.public-site .site-header.mobile-menu-open{z-index:60}.public-site .site-header.mobile-menu-open~.route-shell{overflow:hidden} }
-@media(min-width:761px) and (max-width:1024px){.public-site .hero{min-height:0}.public-site .hero-grid{padding:48px 0;gap:34px}.public-site .hero-visual{min-height:420px}.public-site .hero-copy h1{font-size:48px}}
+@media(min-width:761px) and (max-width:1024px){.public-site .hero{min-height:0}.public-site .hero-grid{padding:42px 0 52px;gap:34px}.public-site .hero-visual{min-height:390px}.public-site .hero-copy h1{font-size:48px}.public-site .floating-card{transform:scale(.9);transform-origin:center}}
 @media(max-width:760px){ .public-site .container{width:min(1240px,calc(100% - 28px))}.public-site .nav-shell{min-height:74px}.public-site .site-header .brand-emblem{width:50px;height:50px}.public-site .brand-copy b{font-size:14px}.public-site .hero{min-height:auto}.public-site .hero-grid{padding:48px 0;gap:28px}.public-site .hero-copy h1{font-size:38px}.public-site .hero-copy .lead{font-size:16px}.public-site .hero-visual{min-height:360px}.public-site .section{padding:54px 0}.public-site .card{border-radius:20px}.public-site .trust-item{border-left:0;border-bottom:1px solid var(--premium-line)} }
