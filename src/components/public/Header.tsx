@@ -38,12 +38,16 @@ function NavigationItem({ item }: { item: ManagementNavItem }) {
   const [desktop, setDesktop] = useState(false);
   const [position, setPosition] = useState({ left: 0, top: 0 });
   const buttonRef = useRef<HTMLButtonElement>(null);
+  const closeTimerRef = useRef<ReturnType<typeof setTimeout> | null>(null);
 
   useEffect(() => {
     const update = () => setDesktop(window.innerWidth > 1120);
     update();
     window.addEventListener("resize", update);
-    return () => window.removeEventListener("resize", update);
+    return () => {
+      window.removeEventListener("resize", update);
+      if (closeTimerRef.current) clearTimeout(closeTimerRef.current);
+    };
   }, []);
 
   if (!item.children) {
@@ -57,8 +61,44 @@ function NavigationItem({ item }: { item: ManagementNavItem }) {
     );
   }
 
+  function clearScheduledClose() {
+    if (!closeTimerRef.current) return;
+    clearTimeout(closeTimerRef.current);
+    closeTimerRef.current = null;
+  }
+
+  function updatePosition() {
+    if (!buttonRef.current) return;
+    const rect = buttonRef.current.getBoundingClientRect();
+    const width = Math.min(390, window.innerWidth - 36);
+    setPosition({
+      left: Math.max(18, Math.min(rect.right - width, window.innerWidth - width - 18)),
+      top: rect.bottom + 10,
+    });
+  }
+
+  function openDesktopMenu() {
+    if (!desktop) return;
+    clearScheduledClose();
+    updatePosition();
+    setOpen(true);
+  }
+
+  function scheduleDesktopClose() {
+    if (!desktop) return;
+    clearScheduledClose();
+    closeTimerRef.current = setTimeout(() => setOpen(false), 180);
+  }
+
   const menu = (
-    <div className={`mega-menu ${desktop && open ? "legacy-floating-menu" : ""}`} role="menu" style={desktop ? position : undefined}>
+    <div
+      className={`mega-menu ${desktop ? "legacy-floating-menu" : ""}`}
+      onFocus={clearScheduledClose}
+      onMouseEnter={clearScheduledClose}
+      onMouseLeave={scheduleDesktopClose}
+      role="menu"
+      style={desktop ? position : undefined}
+    >
       {item.href && !item.children.some((child) => child.href === item.href) ? (
         <Link href={item.href}>
           <span><b>نظرة عامة</b><small>{item.label}</small></span>
@@ -78,26 +118,29 @@ function NavigationItem({ item }: { item: ManagementNavItem }) {
   );
 
   function toggleMenu() {
-    if (desktop && buttonRef.current) {
-      const rect = buttonRef.current.getBoundingClientRect();
-      const width = 390;
-      setPosition({
-        left: Math.max(18, Math.min(rect.right - width, window.innerWidth - width - 18)),
-        top: rect.bottom + 10,
-      });
+    clearScheduledClose();
+    if (desktop) {
+      openDesktopMenu();
+      return;
     }
     setOpen((value) => !value);
   }
 
   return (
-    <li className={open ? "dropdown-open" : undefined}>
+    <li
+      className={open ? "dropdown-open" : undefined}
+      onBlur={scheduleDesktopClose}
+      onFocus={openDesktopMenu}
+      onMouseEnter={openDesktopMenu}
+      onMouseLeave={scheduleDesktopClose}
+    >
       <button aria-expanded={open} aria-haspopup="true" className="nav-link-button" onClick={toggleMenu} ref={buttonRef} type="button">
         {item.university ? (
           <Image alt="" aria-hidden="true" className="legacy-university-nav-logo" height={28} src="/brand/aboubacar-ibrahim-university-icon-64.png" width={28} />
         ) : null}
         {item.label} <span aria-hidden="true">⌄</span>
       </button>
-      {open && desktop ? createPortal(menu, document.body) : menu}
+      {desktop ? (open ? createPortal(menu, document.body) : null) : menu}
     </li>
   );
 }
