@@ -71,7 +71,7 @@ function NavigationItem({ item }: { item: ManagementNavItem }) {
   const closeTimerRef = useRef<ReturnType<typeof setTimeout> | null>(null);
 
   useEffect(() => {
-    const update = () => setDesktop(window.innerWidth > 760);
+    const update = () => setDesktop(window.innerWidth > 1320);
     update();
     window.addEventListener("resize", update);
     return () => {
@@ -156,9 +156,6 @@ function NavigationItem({ item }: { item: ManagementNavItem }) {
       onMouseLeave={scheduleDesktopClose}
     >
       <button aria-expanded={open} aria-haspopup="true" className="nav-link-button" onClick={toggleMenu} ref={buttonRef} type="button">
-        {item.university ? (
-          <Image alt="" aria-hidden="true" className="legacy-university-nav-logo" height={28} src="/brand/aboubacar-ibrahim-university-icon-64.png" width={28} />
-        ) : null}
         {item.label} <span aria-hidden="true">⌄</span>
       </button>
       {desktop ? (open ? createPortal(menu, document.body) : null) : menu}
@@ -174,21 +171,24 @@ export function Header() {
       <a className="skip-link" href="#main">انتقل إلى المحتوى</a>
       <header className="site-header">
         <div className="container nav-shell">
-          <Link aria-label="كلية الحديث وعلومه — الصفحة الرئيسية" className="brand" href="/">
-            <Image alt="شعار كلية الحديث وعلومه" className="brand-emblem" height={58} loading="eager" src="/brand/hadith-college-logo-128.png" width={58} />
-            <span className="brand-copy"><b>كلية الحديث وعلومه</b><small>للرواية والدراية والتحقيق</small></span>
-          </Link>
-          <Link className="header-university-accreditation" href="/about/university">
-            <Image alt="" aria-hidden="true" height={34} src="/brand/aboubacar-ibrahim-university-icon-64.png" width={34} />
-            <span>معتمدة من جامعة أبو بكر إبراهيم</span>
-          </Link>
+          <div className="brand-column">
+            <Link aria-label="كلية الحديث وعلومه — الصفحة الرئيسية" className="brand" href="/">
+              <Image alt="شعار كلية الحديث وعلومه" className="brand-emblem" height={58} loading="eager" src="/brand/hadith-college-logo-128.png" width={58} />
+              <span className="brand-copy"><b>كلية الحديث وعلومه</b><small>للرواية والدراية والتحقيق</small></span>
+            </Link>
+            <Link className="header-university-accreditation" href="/about/university">
+              <Image alt="" aria-hidden="true" height={26} src="/brand/aboubacar-ibrahim-university-icon-64.png" width={26} />
+              <span>معتمدة من جامعة أبو بكر إبراهيم</span>
+            </Link>
+          </div>
           <ul aria-label="التنقل الرئيسي" className={`nav-links ${mobileOpen ? "open" : ""}`}>
             <li className="mobile-university-accreditation">
               <Link href="/about/university">
-                <Image alt="" aria-hidden="true" height={34} src="/brand/aboubacar-ibrahim-university-icon-64.png" width={34} />
+                <Image alt="" aria-hidden="true" height={26} src="/brand/aboubacar-ibrahim-university-icon-64.png" width={26} />
                 <span>معتمدة من جامعة أبو بكر إبراهيم</span>
               </Link>
             </li>
+            <li className="mobile-student-login"><Link href="/dashboard/student">دخول الطالب</Link></li>
             {managementNavigation.map((item) => <NavigationItem item={item} key={item.label} />)}
           </ul>
           <div className="nav-actions">
