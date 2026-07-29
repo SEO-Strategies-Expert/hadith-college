@@ -3,6 +3,7 @@ import { readFile } from "node:fs/promises";
 import path from "node:path";
 
 const legacyFiles: Record<string, string> = {
+  index: "index.html",
   about: "about.html", admissions: "admissions.html", contact: "contact.html", courses: "courses.html", faculty: "faculty.html",
   "hadith-research-sites": "hadith-research-sites.html", ijazat: "ijazat.html", library: "library.html",
   "manuscripts-lab": "manuscripts-lab.html", news: "news.html", "program-foundation": "program-foundation.html",
@@ -22,7 +23,16 @@ const routeTargets: Record<string, string> = {
 function extractMain(html: string) {
   const match = html.match(/<main\b[^>]*>([\s\S]*?)<\/main>/i);
   if (!match) throw new Error("Legacy page is missing its main content.");
-  return Object.entries(routeTargets).reduce((content, [from, to]) => content.replaceAll(`href="${from}"`, `href="${to}"`), match[1]);
+  const contentWithRoutes = Object.entries(routeTargets).reduce(
+    (content, [from, to]) => content.replaceAll(`href="${from}"`, `href="${to}"`),
+    match[1],
+  );
+
+  // The original archive keeps its public assets under assets/.  Preserve that
+  // visual source while serving the files through Next's public directory.
+  return contentWithRoutes
+    .replaceAll('src="assets/', 'src="/assets/')
+    .replaceAll('href="assets/', 'href="/assets/');
 }
 
 export function hasLegacyStaticSections(route: string) {
